@@ -1,0 +1,565 @@
+\documentclass{beamer}
+
+\usepackage{beamerthemesplit}
+\usetheme{Singapore} %Copenhagen}
+%\usecolortheme{whale}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+
+\usepackage{textcomp}
+\usepackage{amssymb,amsmath}
+%\usepackage{animate}
+%\usepackage{longtable}
+\usepackage{xcolor}
+
+%\usepackage{pstricks}
+
+\newcounter{N}
+
+%% Форматирование окружения itemize
+%\usepackage{ragged2e}
+%\let\olditem\item
+%\renewcommand\item{\olditem\justifying}
+
+
+\title[]{Градиент и дифференциальные операторы}
+
+\author[]{ {\em Верещагин Антон Сергеевич}
+	\\
+	канд. физ.-мат. наук, доцент\\
+	\bigskip
+	Кафедра аэрогидродинамики ФЛА НГТУ
+}
+
+\newtheorem{dfn}{Определение}  
+\newtheorem{theorems}{Теорема}  
+
+\newcommand{\Rn}{\mathrm{R}^n}
+\newcommand{\Sm}{\mathrm{S}^m}
+\newcommand{\Ql}{\mathrm{Q}^l}
+
+\newcommand{\Rd}[1]{\mathbb{R}^{#1}}
+\newcommand{\Vn}{\mathrm{V}^n}
+
+\newcommand{\oper}[1]{{\bf #1}}
+\newcommand{\basis}[1]{\vec{\bf #1}}
+\newcommand{\dt}[1]{\frac{d #1}{dt}}
+\newcommand{\dtds}[1]{\displaystyle\frac{d #1}{dt}}
+\newcommand{\ds}[1]{\frac{d #1}{ds}}
+\newcommand{\dsds}[1]{\displaystyle\frac{d #1}{ds}}
+\newcommand{\dsd}[1]{\frac{d^2 #1}{ds^2}}
+\newcommand{\pdt}[1]{\frac{\partial #1}{\partial t}}
+\newcommand{\pds}[1]{\frac{\partial #1}{\partial s}}
+\newcommand{\pdx}[1]{\frac{\partial #1}{\partial x}}
+\newcommand{\pdy}[1]{\frac{\partial #1}{\partial y}}
+\newcommand{\pdz}[1]{\frac{\partial #1}{\partial z}}
+\newcommand{\pdxds}[1]{\displaystyle\frac{\partial #1}{\partial x}}
+\newcommand{\pdyds}[1]{\displaystyle\frac{\partial #1}{\partial y}}
+\newcommand{\pdzds}[1]{\displaystyle\frac{\partial #1}{\partial z}}
+\newcommand{\pdn}[1]{\frac{\partial #1}{\partial n}}
+\newcommand{\grad}[1]{{\rm grad}\, #1}
+
+\begin{document}
+
+\frame{\titlepage}
+
+
+\frame{
+\frametitle{Аннотация}
+\parbox{\textwidth}{Градиент и его свойства. Потенциальный вектор и его свойства. Градиент вектора по вектору. Субстанциональная производная.
+}
+}
+
+\frame{
+\frametitle{Производная вдоль кривой}
+
+\parbox{\textwidth}{
+\scriptsize
+Рассмотрим скалярное поле функции $\varphi(\vec{r})=\varphi(x,y,z)$. \pause  Проведём некоторую кривую $L$, параметризованную с помощью параметра $s$ -- расстояния до некоторой точки $M$:
+\[ 
+x=x(s),\quad y=y(s),\quad z=z(s). 
+\] \pause 
+Тогда производная вдоль кривой имеет вид:
+\[ 
+\ds{}\varphi(x(s),y(s),z(s))=\pdx{\varphi}\ds{x}+\pdy{\varphi}\ds{y}+\pdz{\varphi}\ds{z}.
+\] \pause 
+Обыкновенные производные в равенстве -- направляющие косинусы ($\vec{s}$ -- единичный вектор касательных)
+\[ 
+\ds{x}=\cos(\vec{s},x),\quad \ds{y}=\cos(\vec{s},y),\quad \ds{z}=\cos(\vec{s},z), 
+\]  \pause 
+то
+\[ 
+\ds{\varphi}=\pdx{\varphi}\cos(\vec{s},x)+\pdy{\varphi}\cos(\vec{s},y)+\pdz{\varphi}\cos(\vec{s},z).
+\] \pause 
+Таким образом, $ \dsds{\varphi} $ -- проекция вектора $(\pdx{\varphi},\pdy{\varphi},\pdz{\varphi})$ на вектор $\vec{s}$.
+}
+}
+
+\frame{
+\frametitle{Определение градиента}
+
+\begin{dfn}
+\parbox{\textwidth}{
+Вектор с компонентами $(\pdx{\varphi},\pdy{\varphi},\pdz{\varphi})$ называется \alert{градиентом функции} $ \varphi $ в точке $M$ и обозначается $ \grad{\varphi} $.
+}
+\end{dfn} \pause 
+
+\bigskip
+\parbox{\textwidth}{
+Отсюда
+\[ 
+\grad{\varphi}=\basis{i}\pdx{\varphi}+\basis{j}\pdy{\varphi}+\basis{k}\pdz{\varphi}.
+\] \pause 
+Длина вектора
+\[ 
+|\grad{\varphi}|=\sqrt{\left(\pdx{\varphi}\right)^2+\left(\pdy{\varphi}\right)^2+\left(\pdz{\varphi}\right)^2}.
+\]
+}
+}
+
+\frame{
+\frametitle{Альтернативное определение градиента}
+\parbox{\textwidth}{
+Еще одно выражение для производной вдоль направления $ \vec{s} $: 
+\[ 
+\ds{\varphi}= \pause \vec{s}\cdot\grad{\varphi}= \pause |\grad{\varphi}|\, \cos(\grad{\varphi},\vec{s}),
+\]
+из которого вытекает следующее определение:
+} \pause 
+
+\begin{dfn}
+\parbox{\textwidth}{
+\alert{Градиентом функции} $\varphi$ называется вектор, имеющий направление быстрейшего роста функции $ \varphi $ и по величине равный производной в этом направлении.
+}
+\end{dfn}
+
+}
+
+
+\frame{
+\frametitle{Оператор набла или оператор Гамильтона}
+\begin{dfn}
+\parbox{\textwidth}{
+
+Дифференциальный оператор 
+\[ 
+\nabla=\basis{i}\pdx{}+\basis{j}\pdy{}+\basis{k}\pdz{}
+\]
+называется \alert{наблой} или \alert{оператором Гамильтона}.
+}
+\end{dfn} \pause 
+
+\medskip
+\parbox{\textwidth}{
+В терминах оператора набла градиент функции можно записать в виде:
+\[ 
+\nabla\varphi=\basis{i}\pdx{\varphi}+\basis{j}\pdy{\varphi}+\basis{k}\pdz{\varphi}.
+\]
+}
+}
+
+\frame{
+\frametitle{Поверхность уровня}
+
+\begin{columns}
+\begin{column}{0.3\textwidth}
+\includegraphics[width=\textwidth]{../img/level_surface.png}
+\end{column} \pause 
+\begin{column}{0.7\textwidth}
+\parbox{\textwidth}{
+Через произвольную точку $M$ проведем поверхность уровня 
+\[
+\varphi(x,y,z)={\rm const}.
+\] \pause 
+Т.к. производная вдоль любой кривой, лежащей на поверхности уровня, от $\varphi(x,y,z)$  равна
+}
+\end{column}
+\end{columns}
+\parbox{\textwidth}{
+{\scriptsize
+\[
+\begin{array}{c}
+\dsds{}\varphi(x(s),y(s),z(s)) =  \pause \lim_{\Delta s \to 0}
+\displaystyle\frac{\varphi(x(s+\Delta s),y(s+\Delta s),z(s+\Delta s))-\varphi(x(s),y(s),z(s))}{\Delta s}=  \pause \\
+= \grad{\varphi} \cdot \vec{s} =  \pause 0.
+\end{array}
+\]}
+Следовательно градиент ортогонален касательной плоскости в т. $M$,  \pause и
+\alert{
+\[ 
+\grad{\varphi}=\pdn{\varphi}\vec{n},
+\]}
+где $\vec{n}$ -- вектор единичной нормали к поверхности уровня.
+}
+
+}
+
+\frame{
+\frametitle{Поверхность и трубка тока}
+\small
+
+\begin{dfn}
+\parbox{\textwidth}{
+\alert{Поверхностью тока} вектора $\vec{v}$ называется  поверхность, образованная линиями тока, проходящими через некоторую наперед заданную кривую.
+}
+\end{dfn} \pause 
+
+\begin{dfn}
+\parbox{\textwidth}{
+\alert{Трубкой тока} вектора $\vec{v}$ называется  часть пространства, заключенная внутри поверхности тока, образованной замкнутой кривой.
+}
+\end{dfn} \pause 
+
+\bigskip
+\parbox{\textwidth}{
+Пусть векторные линии для поля скоростей $ \vec{v}(x,y,z) $ определяются соотношением 
+\[
+\Phi(x,y,z)=0.
+\] \pause 
+По определению поверхности тока $\vec{v}$ является касательным в любой точке этой поверхности и следовательно
+\[ 
+\vec{v}\cdot\grad{\Phi}=0,
+\]
+что является уравнением поверхности тока.
+}
+}
+
+\frame{
+\frametitle{Представление дифференциала функции через градиент}
+\parbox{\textwidth}{
+Пусть 
+\[ 
+d\vec{r}=\basis{i}dx+\basis{j}dy+\basis{k}dz,
+\] \pause 
+тогда 
+\[
+\begin{array}{c}
+d\vec{r}\cdot\grad{\varphi}= \pause 
+\left(\basis{i}dx+\basis{j}dy+\basis{k}dz\right)\cdot
+\left(\basis{i}\pdxds{\varphi}+\basis{j}\pdyds{\varphi}+\basis{k}\pdzds{\varphi}\right)=\\ \pause 
+=\pdxds{\varphi}dx+\pdyds{\varphi}dy+\pdzds{\varphi}dz= \pause d\varphi
+\end{array} 
+\] \pause 
+
+Таким образом для произвольного вектора $d\vec{r}$
+\alert{\[ d\varphi=d\vec{r}\cdot\grad{\varphi}. \]}
+}
+}
+
+\frame{
+\frametitle{Теорема о градиенте}
+\begin{theorems}[о градиенте функции]\normalfont
+\parbox{\textwidth}{
+Если для некоторой скалярной функции $ \varphi(\vec{r}) $ найдется такой вектор $ \vec{a} $, \pause  что для произвольных векторов $ d\vec{r} $ справедливо равенство
+\[
+d\varphi=d\vec{r}\cdot\vec{a},
+\] \pause 
+то вектор $ \vec{a} $ есть градиент функции $ \varphi(\vec{r}): \vec{a}=\grad{\varphi} $.
+}
+\end{theorems} \pause 
+
+\begin{proof}
+\parbox{\textwidth}{
+Из равенства для полного дифференциала $d\varphi$ вычтем равенство из условия теоремы, тогда
+\[ 0=d\vec{r}\cdot(\vec{a}-\grad{\varphi}). \] \pause 
+В силу произвольности $ d\vec{r} $ $ \vec{a}=\grad{\varphi} $.
+
+
+}
+\end{proof}
+}
+
+
+\frame{
+\frametitle{Пример}
+\begin{exampleblock}{\parbox{\textwidth}{Градиент функции, зависящий только от расстояния до начала координат}}
+\parbox{\textwidth}{
+Пусть $ \varphi=\varphi(r) $, где $r = \sqrt{x^2+y^2+z^2}$. \pause 
+
+Рассмотрим выражение
+\[
+%\begin{array}{c}
+2\vec{r}\cdot d\vec{r}= \pause 
+d(\vec{r}\cdot\vec{r})=  \pause 
+dr^2= \pause 2rdr
+\quad \Rightarrow \quad  \pause 
+dr=d\vec{r}\cdot\frac{\vec{r}}{r}.
+%\end{array}
+\]
+Тогда
+\[
+d\varphi= \pause 
+\varphi'(r) dr=  \pause 
+d\vec{r}\cdot\frac{\varphi'(r)}{r}\vec{r}.
+\] \pause 
+
+\medskip
+По теореме о градиенте 
+\alert{
+\[
+\grad{r} = \frac{\vec{r}}{r},\quad \pause 
+\grad{\varphi} = \frac{\varphi'(r)}{r}\vec{r}.
+\]
+}
+
+}
+\end{exampleblock}
+
+
+}
+
+\frame{
+\frametitle{Потенциальный вектор}
+\begin{dfn}
+\parbox{\textwidth}{
+Вектор, являющийся градиентом некоторой скалярной функции, называется \alert{потенциальным вектором},  \pause а поле такого вектора -- \alert{потенциальным} и сама скалярная функция \alert{потенциалом}.
+}
+\end{dfn} \pause 
+
+\medskip
+\begin{exampleblock}{Пример потенциального поля $\vec{a}(\vec{r})$}
+Для следующих функций $\vec{a}=\grad{\varphi}$: \pause 
+\begin{itemize}
+\item $\vec{a}(\vec{r})=x\basis{i}+y\basis{j}+z\basis{k}=\vec{r}$,  \pause $\varphi(\vec{r})=1/2(x^2+y^2+z^2)=r^2/2$; \pause 
+\item $\vec{a}(\vec{r})= \vec{r}/r$,  \pause $\varphi(\vec{r})=r$.
+\end{itemize}
+\end{exampleblock}
+}
+
+
+\frame{
+\frametitle{Линейный интеграл от векторной функции вдоль кривой}
+\begin{columns}
+\begin{column}{0.4\textwidth}
+\includegraphics[width=\textwidth]{../img/pdf/integral.pdf}
+%\input{../img/pstricks/integral.tex}
+\end{column}
+\begin{column}{0.6\textwidth}
+
+\begin{dfn}
+\parbox{\textwidth}{
+\alert{Линейным интегралом по кривой $\gamma$ от векторной функции} $\vec{a}(\vec{r})$,  между точками $M$ и $N$ назовем выражение \pause 
+\[ 
+\int\limits_\gamma\vec{a}\cdot d\vec{r} = \lim\limits_{\Delta \vec{x}_i\rightarrow 0} \sum\limits_{i=0}^{n-1}\vec{a}_i\cdot\Delta \vec{x}_i
+\]
+}
+\end{dfn} \pause 
+\end{column}
+\end{columns}
+\parbox{\textwidth}{\it
+независимо от способа разбиения дуги $MN$.  \pause Здесь $\vec{x}_0=M$, $\vec{x}_1$,\ldots,$\vec{x}_{n-1}$, $\vec{x}_n=N$ -- разбиение дуги $MN$ на $n$ частей;  \pause $\Delta \vec{x}_i = \vec{x}_{i+1}-\vec{x}_i$ ($i=\overline{0,n-1}$); \pause 
+$\vec{a}_i=\vec{a}(\vec{x}_i)$.
+}
+
+
+}
+
+\frame{
+\frametitle{Разные записи интеграла}
+
+Пусть задана кривая $\vec{r}=\vec{r}(s)$, параметризованная параметром, связанным с длиной дуги $s$:
+\[
+x=x(s),\quad
+y=y(s),\quad
+z=z(s).
+\] \pause 
+Вектор $\vec{s}=\dsds{\vec{r}}$ -- единичный касательный вектор,  \pause а $a_s=\vec{a}\cdot\vec{s}$ -- длина проекции $\vec{a}$ на $\vec{s}$ в заданной точке.  \pause 
+
+Тогда
+\[ 
+\int\limits_\gamma\vec{a}\cdot d\vec{r} =  \pause 
+\int\limits_\gamma(a_xdx+a_ydy+a_zdz) =  \pause 
+\]
+\[
+ = \int\limits_{s_0}^{s_1}(a_x\ds{x}+a_y\ds{y}+a_z\ds{z})ds= \pause 
+ \int\limits_{s_0}^{s_1} \vec{a}\cdot\vec{s} ds= \pause 
+ \int\limits_{s_0}^{s_1} a_s ds.
+\]
+}
+
+\frame{
+\frametitle{Циркуляция вектора}
+\begin{dfn}
+\parbox{\textwidth}{
+Линейный интеграл вектора $ \vec{a} $ вдоль замкнутой кривой $ C $  \pause называется \alert{циркуляцией вектора} по замкнутому контуру $C$  \pause и обозначается 
+\[ 
+\Gamma_C({\vec{a}}) = \oint\limits_C\vec{a}\cdot d\vec{r}.
+\]
+}
+\end{dfn} \pause 
+\begin{exampleblock}{Аддитивность циркуляции} \pause 
+
+\medskip
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\includegraphics[width=0.7\textwidth]{../img/c1c2.png} 
+\end{column}
+
+\begin{column}{0.1\textwidth}
+\Large
+$\Rightarrow$
+\end{column}
+
+\begin{column}{0.2\textwidth}
+\includegraphics[width=0.7\textwidth]{../img/c.png} 
+\end{column} \pause 
+
+\begin{column}{0.4\textwidth}
+\[
+\oint\limits_{C_1}\vec{a}\cdot d\vec{r}+\oint\limits_{C_2}\vec{a}\cdot d\vec{r} = 
+\]
+\[
+=\oint\limits_{C}\vec{a}\cdot d\vec{r}.
+\]
+
+
+\end{column}
+
+
+\end{columns}
+\end{exampleblock}
+
+}
+
+
+
+\frame{
+\frametitle{Линейный интеграл от потенциального вектора}
+\begin{theorems}
+\parbox{\textwidth}{
+Линейный интеграл вектора $ \vec{a}=\grad{\varphi} $ вдоль любой кривой $ L $, \pause  соединяющей точки $ M_0(\vec{r}_0) $ и $ M_1(\vec{r}_1) $, \pause  равен разности значений функций $ \varphi $ в этих точках.} \pause 
+\end{theorems}
+
+\begin{proof}
+\parbox{\textwidth}{
+Пусть кривая $L$ задана соотношением $\vec{r}=\vec{r}(s)$ и $\vec{r}_0=\vec{r}(s_0)$, $\vec{r}_1=\vec{r}(s_1)$,  \pause тогда
+\[
+\begin{array}{c}
+\displaystyle\int\limits_{\vec{r_0}}^{\vec{r_1}}\vec{a}\cdot d\vec{r} = \pause 
+\displaystyle\int\limits_{s_0}^{s_1}(a_x\dsds{x}+a_y\dsds{y}+a_z\dsds{z})ds=\\ \pause 
+= \displaystyle\int\limits_{s_0}^{s_1}(\pdxds{\varphi}\dsds{x}+\pdyds{\varphi}\ds{y}+\pdzds{\varphi}\dsds{z})ds= \pause 
+\int\limits_{s_0}^{s_1}\dsds{}\varphi(x(s),y(s),z(s))ds=\\ \pause 
+=\varphi(\vec{r}_1)-\varphi(\vec{r}_0).
+\end{array}
+\]
+
+}
+\end{proof}
+
+}
+
+
+\frame{
+\frametitle{Следствия из теоремы}
+\parbox{\textwidth}{
+\begin{exampleblock}{Два следствия теоремы:} \pause 
+\begin{itemize}
+\item значение интеграла от градиента функции зависит только от конечной и начальной точки и не зависит от пути интегрирования; \pause 
+\item интеграл от градиента функции по замкнутому контуру равен 0  \pause (или циркуляция потенциального вектора по любому контуру равна 0).
+\end{itemize}
+\end{exampleblock}
+}
+}
+
+\frame{
+\frametitle{Критерий потенциальности векторного поля}
+\scriptsize
+
+\begin{theorems}\normalfont
+\parbox{\textwidth}{
+Если циркуляция вектора $ \vec{a} $ по любому замкнутому контуру равна нулю в некоторой области,  \pause  то вектор $ \vec{a} $ -- потенциальный вектор, \pause  т.е. равен градиенту некоторой скалярной функции $ \varphi $. \pause 
+}
+\end{theorems}
+
+\begin{proof}
+\begin{columns}
+\begin{column}{0.4\textwidth}
+\includegraphics[width=\textwidth]{../img/circ_potential.png}
+\end{column} \pause 
+\begin{column}{0.6\textwidth}
+\parbox{\textwidth}{
+
+Введем $ \varphi(\vec{r}) $ вида: 
+\begin{equation*}
+\varphi(\vec{r})=\varphi(\vec{r}_0)+\int\limits_{\vec{r}_0}^{\vec{r}}\vec{a}\cdot d\vec{r}.
+\end{equation*} \pause 
+Интеграл в правой части не зависит от пути интегрирования в силу условия теоремы.  \pause 
+
+\medskip
+Полный дифференциал введенной функции
+\begin{equation*}
+d\varphi=\vec{a}\cdot d\vec{r},
+\end{equation*}
+справедлив для любых $d\vec{r}$, \pause  значит $\vec{a}=\grad{\varphi}$.
+}
+\end{column}
+\end{columns}
+
+
+\end{proof}
+
+
+}
+
+
+
+\frame{
+\frametitle{Производная вдоль направления}
+\scriptsize
+\parbox{\textwidth}{
+
+Пусть задана кривая $\vec{r}=\vec{r}(s)$, параметризованная параметром, связанным с длиной дуги $s$:
+\[
+x=x(s),\quad
+y=y(s),\quad
+z=z(s).
+\] \pause 
+Вектор $\vec{s}=\dsds{\vec{r}}$ -- единичный касательный вектор.\\ \pause 
+Введем оператор
+\[
+\vec{s}\cdot\nabla=\cos(\vec{s},x)\pdxds{}+\cos(\vec{s},y)\pdyds{}+\cos(\vec{s},z)\pdzds{},
+\] \pause 
+тогда
+\[ 
+\pds{}a(x(s),y(s),z(s))=\vec{s}\cdot\grad{a} =  (\vec{s}\cdot\nabla) a.
+\] \pause 
+
+\begin{dfn}
+\parbox{\textwidth}{
+Оператор
+\[
+(\vec{v}\cdot\nabla)=v_x\pdx{}+v_y\pdy{}+v_z\pdz{}
+\]
+называется \alert{производной вдоль направления},  \pause где $\vec{v}=(v_x,v_y,v_z)$ -- заданное направление.
+}
+\end{dfn}
+
+}
+}
+
+\frame{
+\frametitle{Пример}
+
+\parbox{\textwidth}{
+Рассмотрим нестационарное движение жидкости, в которой определено нестационарное скалярное поле $ \varphi(t,x,y,z) $,  \pause тогда 
+введем понятие местной производной
+\[ 
+\pdt{\varphi}= \pause \lim\limits_{\Delta t\rightarrow 0}\frac{\varphi(t+\Delta t,M)-\varphi(t,M)}{\Delta t}.
+\] \pause 
+Если же рассматривать изменения функции, перемещаясь вместе с жидкостью, тогда
+\[ 
+\dt{\varphi}= \pause \lim\limits_{\Delta t\rightarrow 0}\frac{\varphi(t+\Delta t,\vec{r}_0+\vec{v}\Delta t)-\varphi(t,\vec{r}_0)}{\Delta t}.
+\] \pause 
+И тогда 
+\[ 
+\dt{\varphi}=\pdt{\varphi}+\vec{v}\cdot\nabla\varphi,\quad 
+\dt{\vec{a}}=\pdt{\vec{a}}+(\vec{v}\cdot\nabla)\vec{a}.
+\]
+}
+}
+
+\end{document}
+
