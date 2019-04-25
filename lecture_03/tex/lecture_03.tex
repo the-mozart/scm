@@ -1,0 +1,667 @@
+\documentclass{beamer}
+
+\usepackage{beamerthemesplit}
+\usetheme{Singapore} %Copenhagen}
+%\usecolortheme{whale}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+
+\usepackage{textcomp}
+\usepackage{amssymb,amsmath}
+%\usepackage{animate}
+%\usepackage{longtable}
+\usepackage{xcolor}
+
+\newcounter{N}
+
+%% Форматирование окружения itemize
+%\usepackage{ragged2e}
+%\let\olditem\item
+%\renewcommand\item{\olditem\justifying}
+
+
+\title[]{Метрика и норма в векторном пространстве. Квадратичные формы.}
+
+\author[]{ {\em Верещагин Антон Сергеевич}
+	\\
+	канд. физ.-мат. наук, доцент\\
+	\bigskip
+	Кафедра аэрогидродинамики ФЛА НГТУ
+}
+%
+
+
+
+\newtheorem{dfn}{Определение}  
+\newtheorem{theorems}{Теорема}  
+
+\newcommand{\Rn}{\mathrm{R}^n}
+\newcommand{\Sm}{\mathrm{S}^m}
+\newcommand{\Ql}{\mathrm{Q}^l}
+
+\newcommand{\Rd}[1]{\mathbb{R}^{#1}}
+\newcommand{\Vn}{\mathrm{V}^n}
+
+
+\newcommand{\oper}[1]{\mathcal{#1}}
+
+\begin{document}
+
+\frame{\titlepage}
+
+
+\frame{
+\frametitle{Аннотация}
+
+\parbox{\textwidth}{
+Метрические пространства. Нормы вектора и оператора. Квадратичные формы. Приведение формы к сумме квадратов. Условие положительной определенности квадратичной формы.
+}
+}
+
+
+\frame{
+\frametitle{Расстояние между векторами}
+
+\begin{dfn}
+\parbox{\textwidth}{
+Пусть $\Rn$ -- $n$-мерное векторное пространство. \pause \alert{Расстоянием} между векторами $\vec{x}$ и $\vec{y}$ называется неотрицательная скалярная функция $\rho(\vec{x}, \vec{y}) \geq 0$,  \pause удовлетворяющая аксиомам:
+\begin{itemize}
+\item $\rho(\vec{x},\vec{y}) = 0$ тогда и только тогда, когда $\vec{x}=\vec{y}$; \pause 
+\item $\rho(\vec{x},\vec{y}) = \rho(\vec{y},\vec{x})$ (аксиома симметрии); \pause 
+\item $\rho(\vec{x},\vec{z}) \leq \rho(\vec{x},\vec{y}) + \rho(\vec{y},\vec{z})$ (аксиома треугольника). \pause 
+\end{itemize}
+}
+\end{dfn}
+
+\bigskip
+\fbox{
+\parbox{\textwidth}{
+Если в пространстве определено расстояние между векторами, то говорят, что определена \alert{\it метрика}.
+}
+}
+}
+
+\frame{
+\frametitle{Метрические пространства}
+
+\begin{dfn}
+\parbox{\textwidth}{
+Векторное пространство $\Rn$ с введенной метрикой называется \alert{\it метрическим пространством}.
+}
+\end{dfn} \pause 
+
+\bigskip
+\begin{exampleblock}{Примеры метрик в $\Rn$:}
+\parbox{\textwidth}{
+\begin{itemize}
+\item $\rho(\vec{x},\vec{y}) = \sum\limits_{i=1}^{n}|x_i-y_i|$, \pause 
+\item $\rho(\vec{x},\vec{y}) = \sqrt{\sum\limits_{i=1}^{n}(x_i-y_i)^2}$.
+\end{itemize}
+}
+\end{exampleblock}
+
+}
+
+
+\frame{
+\frametitle{Норма вектора}
+\begin{dfn}
+\parbox{\textwidth}{
+\alert{Нормой вектора} $||\vec{x}||$ в $n$-мерном векторном пространстве  \pause называется неотрицательная скалярная функция от вектора $\vec{x}$,  \pause удовлетворяющая следующим аксиомам:  \pause 
+\begin{itemize}
+\item $||\vec{x}||=0$ тогда и только тогда, когда $\vec{x}=0$; \pause 
+\item $||\alpha \vec{x}||=|\alpha|||\vec{x}||$, где $\alpha$ -- произвольное число; \pause 
+\item $||\vec{x}+\vec{y}||\leq||\vec{x}||+||\vec{y}||$ (неравенство треугольника).
+\end{itemize}
+}
+\end{dfn}
+
+
+}
+
+\frame{
+\frametitle{Нормированные пространства}
+
+\begin{dfn}
+\parbox{\textwidth}{
+Векторное пространство $\Rn$ с введенной на нем нормой называется \alert{\it нормированным векторным пространством}.
+}
+\end{dfn}  \pause 
+
+\bigskip
+\begin{exampleblock}{Примеры норм в $\Rn$:}
+\begin{columns}
+\begin{column}{0.4\textwidth}
+\begin{itemize}
+\item $||\vec{x}|| = \sum\limits_{i=1}^{n}|x_i|$, \pause 
+\item $||\vec{x}|| = \sqrt{\sum\limits_{i=1}^{n}x_i^2}$. \pause 
+\end{itemize}
+\end{column}
+
+\begin{column}{0.6\textwidth}
+%\parbox{\textwidth}{
+%Если в векторном пространстве введена метрика $\rho(\vec{x},\vec{y})$, тогда можно ввести норму по формуле:
+%\begin{itemize}
+%\item $||\vec{x}|| = \rho(\vec{x}, 0)$.
+%\end{itemize}
+%
+%\medskip
+%(Докажите самостоятельно.)
+%}
+\end{column}
+
+
+\end{columns}
+
+
+\end{exampleblock}
+}
+
+\frame{
+\frametitle{Норма линейного оператора}
+
+\begin{dfn}
+\parbox{\textwidth}{
+\alert{Нормой линейного оператора} $\oper{A}$ в нормированном пространстве $\Rn$ \pause  называется наименьшее из чисел $C$ таких, \pause что $\forall \vec{x}\in \Rn$
+\[
+||\oper{A}\vec{x}|| \leq C ||\vec{x}|| \pause 
+\]
+и обозначается $||\oper{A}||$,  \pause или, по-другому,
+\[
+||\oper{A}||=\inf \{C : \forall \vec{x}\in \Rn \quad ||\oper{A}\vec{x}|| \leq C ||\vec{x}|| \}.
+\]
+
+}
+\end{dfn}
+
+}
+
+\frame{
+\frametitle{Связь между различными определениями нормы линейного оператора}
+Пусть $\oper{A}$ -- линейный оператор в $\Rn$,  \pause $\vec{x}$ -- произвольный вектор из $\Rn$.  \pause Рассмотрим
+\[
+\frac{||\oper{A}\vec{x}||}{||\vec{x}||}= \pause 
+||\frac{1}{||\vec{x}||}\oper{A}\vec{x}||= \pause 
+\left|\left|\oper{A}\left(\frac{\vec{x}}{||\vec{x}||}\right) \right|\right| =  \pause 
+||\oper{A}\vec{y}|| \leq C,
+\]
+где $\vec{y}=\vec{x}/||\vec{x}||$,  \pause причем
+\[
+||\vec{y}|| =  \pause 
+\left|\left| \frac{\vec{x}}{||\vec{x}||}  \right|\right| =  \pause 
+\frac{||\vec{x}||}{||\vec{x}||} =  \pause 1. \pause 
+\]
+Таким образом,  \pause $\vec{y}\in\Rn$ -- произвольный вектор,  \pause такой что $||\vec{y}||=1$.
+}
+
+\frame{
+\frametitle{Норма линейного оператора}
+
+\begin{dfn}[альтернативное определение]
+\parbox{\textwidth}{
+\alert{Нормой линейного оператора} $\oper{A}$  \pause в нормированном пространстве $\Rn$  \pause называется наибольшее значение,  \pause принимаемое функцией 
+$||\oper{A}\vec{x}||$  $\forall \vec{x}\in R^n$,  \pause таких, что $||\vec{x}||=1$,  \pause или, по-другому, \pause 
+\[
+||\oper{A}||= \pause \sup \{||\oper{A}\vec{x}|| : \forall \vec{x}\in \Rn \quad ||\vec{x}||=1\}.
+\]
+}
+\end{dfn}
+
+
+}
+
+
+\frame{
+\frametitle{Пример: проекция вектора на плоскость}
+
+\parbox{\textwidth}{
+Рассмотрите оператор проектирования вектора на плоскость и посчитайте норму такого линейного оператора.
+}
+
+}
+
+\frame{
+\frametitle{Определение квадратичной формы}
+\begin{dfn}
+\parbox{\textwidth}{
+\alert{Квадратичной формой} называется однородный многочлен второй степени  \pause  относительно $n$ переменных $x_1$, $x_2$, ... , $x_n$: \pause 
+\[
+A(x,x)=\sum\limits_{i,k=1}^n a_{ik}x_ix_k \quad  (a_{ik}=a_{ki}).
+\]
+}
+\end{dfn} \pause 
+
+\begin{exampleblock}{Примеры:}
+\begin{itemize}
+\item $n=1$: $A_1(x,x) = a_{11} x_1^2$, \pause 
+\item $n=2$: $A_2(x,x) = a_{11}x_1^2 + 2 a_{12} x_1 x_2 + a_{22}x_2^2$, \pause 
+\item $n=3$: $A_3(x,x) = x_1^2 + 2 x_1 x_2 + x_2^2 + x_2 x_3$. \pause 
+\item $n=3$: $A_4(x,x) = x_1^2 + x_2^2 - x_3^2$.
+\end{itemize}
+\end{exampleblock}
+
+
+}
+
+
+\frame{
+\frametitle{Матрица, соответствующая квадратичной форме}
+
+\parbox{\textwidth}{
+Из коэффициентов квадратичной формы  \pause можно составить квадратную симметричную матрицу $A$: \pause 
+\[
+A =  \left(
+\begin{array}{cccc}
+a_{11} & a_{12} & \ldots & a_{1n} \\
+a_{12} & a_{22} & \ldots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots\\
+a_{1n} & a_{2n} & \ldots & a_{nn} \\
+\end{array}\right),\quad
+A=A^{\rm t}.
+\] \pause 
+
+C помощью матрицы $A$ квадратичную форму $A(x,x)$ \pause  можно переписать в виде:
+\[
+A(x,x)=x^{\rm t}Ax,
+\] \pause 
+где $x=\{x_1, x_2,\ldots,x_n\}^{\rm t}$ -- вектор столбец из переменных $x_i$ ($i=\overline{1,n}$).
+
+}
+
+
+}
+
+\frame{
+\frametitle{Вещественная квадратичная форма}
+\begin{dfn}
+\parbox{\textwidth}{
+Если матрица $A$ есть вещественная симметричная матрица,  \pause то соответствующая ей квадратичная форма называется \alert{вещественной формой}. 
+}
+\end{dfn} \pause 
+
+\begin{dfn}
+\parbox{\textwidth}{
+Определитель матрицы $|A|$  \pause называется \alert{дискриминантом} квадратичной формы.  \pause Если $|A|=0$, то квадратичная форма \alert{сингулярна},  \pause иначе \alert{регулярна}.
+}
+\end{dfn} \pause 
+
+\begin{dfn}
+\parbox{\textwidth}{
+Ранг матрицы $A$, отвечающей квадратичной форме,  \pause есть \alert{ранг квадратичной формы}.
+}
+\end{dfn}
+
+}
+
+\frame{
+\frametitle{Замена переменных}
+\parbox{\textwidth}{
+Рассмотрим линейную замену переменных \pause 
+\[
+x_i=\sum\limits_{k=1}^n t_{ik}\xi_k\quad (i=1,2,\ldots,n),
+\] \pause 
+что в матричном форме можно записать как \pause 
+\[
+\begin{array}{c}
+x = T \xi,\\ \pause 
+\\
+x=\{x_1, x_2,\ldots,x_n\}^{\rm t},\quad
+\xi=\{\xi_1, \xi_2,\ldots,\xi_n\}^{\rm t},\\ \pause 
+T=(t_{ij})_{1\leq i,j \leq n},\quad
+|T|\neq 0. 
+\end{array}
+\]  \pause 
+Тогда квадратичная форма будет иметь вид: \pause 
+\[
+A(x,x)= \pause 
+x^{\rm t}Ax= \pause 
+(T \xi)^{\rm t} A T \xi=  \pause 
+\xi^{\rm t}\left( T^{\rm t}AT \right)\xi= \pause 
+\xi^{\rm t}\hat{A}\xi=\hat{A}(\xi,\xi),  \pause 
+\]
+где $\hat{A}=T^{\rm t}AT$.
+}
+
+}
+
+
+\frame{
+\frametitle{Свойства $\hat{A}$}
+\begin{exampleblock}{Симметричность $\hat{A}$:}
+\parbox{\textwidth}{ \pause 
+\[
+\hat{A}^{\rm t}= \pause (T^{\rm t}AT)^{\rm t}=  \pause T^{\rm t} A T = \hat{A}. \pause 
+\]
+}
+\end{exampleblock}
+\begin{dfn}
+\parbox{\textwidth}{
+Две симметрические матрицы $A$ и $\hat{A}$, \pause  связанные равенством 
+\[
+\hat{A}=T^{\rm t}AT,
+\]  \pause 
+называются \alert{конгруэнтными},  \pause где $T$ -- неособенная матрица.
+}
+\end{dfn} \pause 
+
+\begin{exampleblock}{Ранг $\hat{A}$:}
+Так как $|T|\neq 0$,  \pause то по теореме о ранге  \pause ранг $A$ равен рангу матрицы $\hat{A}$.
+\end{exampleblock}
+
+}
+
+\frame{
+\frametitle{Ранг диагональной матрицы}
+\begin{theorems}
+\normalfont
+\parbox{\textwidth}{
+Ранг диагональной матрицы  \pause равен количеству ненулевых элементов на диагонали.
+}
+\end{theorems} \pause 
+
+\begin{proof}
+\parbox{\textwidth}{
+Рассмотрим диагональную матрицу $D$.  \pause Пусть в матрице $r$ ненулевых диагональных элементов $a_{i_1}$, $a_{i_2}$,\ldots, $a_{i_r}$.  \pause Очевидно, что главный минор $M\neq 0$, где \pause 
+\[
+D = \left(
+\begin{array}{cccc}
+a_1 & 0 & \cdots & 0\\
+0  & a_2 & \cdots & 0\\
+\vdots &  \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & a_n
+\end{array}
+\right),\quad \pause 
+M=D\left(
+\begin{array}{cccc}
+i_1 & i_2 & \cdots & i_r\\
+i_1 & i_2 & \cdots & i_r\\
+\end{array}
+\right)
+\neq 0.
+\] \pause 
+Все остальные миноры большего размера будут равны $0$,  \pause т.к. определитель будет считаться от треугольной матрицы с нулями на диагонали. \pause  Следовательно, ранг матрицы $D$ равен $r$.
+}
+\end{proof}
+
+}
+
+\frame{
+\frametitle{О представлении квадратичной формы в виде суммы квадратов}
+
+\begin{theorems}
+\parbox{\textwidth}{\normalfont
+Любую квадратичную форму  \pause с помощью линейной замены переменных  \pause можно привести к виду
+\[
+A(x,x)=\sum\limits_{i=1}^r a_iX_i^2,
+\] \pause 
+где $X_i=\sum\limits_{k=1}^n\alpha_{ik}x_k$ и $r\leq n$.
+}
+\end{theorems}  
+
+}
+
+\frame{
+\frametitle{О представлении квадратичной формы в виде суммы квадратов}
+\begin{proof}
+
+\only<1-12>{
+\parbox{\textwidth}{
+По теореме о собственных значениях симметричной матрицы 
+\[
+A=QDQ^{-1},
+\] \pause 
+где $D$ -- диагональная матрица, составленная из собственных значений $A$;  \pause $Q$ -- ортогональная матрица  \pause ($Q^{\rm t}=Q^{-1}$) из собственных векторов, \pause  образующих ортонормированный базис.
+
+\medskip
+Это означает, что если в качестве матрицы для замены переменных положить $T=Q$,  \pause тогда
+\[
+\hat{A}= \pause 
+T^{\rm t}AT= \pause 
+Q^{\rm t} A Q =  \pause 
+Q^{-1} QDQ^{-1} Q =  \pause 
+D. \pause 
+\]
+Пусть $r=r(D)=r(A)$  \pause и равно количеству ненулевых элементов на диагонали матрицы $D$.
+}
+
+
+}
+
+
+
+\only<13>{
+\parbox{\textwidth}{
+
+Рассмотрим
+\[
+\begin{array}{l}
+\hat{A}(\xi,\xi) = \xi^{\rm t} D \xi=\\
+=(\xi_1,\dots,\xi_r, \xi_{r+1}, \ldots ,\xi_n)
+\left(
+\begin{array}{cccccc}
+\lambda_1 & \ldots & 0 & 0 & \ldots  & 0 \\
+\vdots & \ddots & \vdots & \vdots & & \vdots \\
+0 & \ldots & \lambda_r & 0 & \ldots  & 0 \\
+0 & \ldots & 0 & 0 & \ldots  & 0 \\
+\vdots &  & \vdots & \vdots & \ddots & \vdots \\
+0 & \ldots & 0 & 0 & \ldots  & 0 
+\end{array}
+\right)
+\left(
+\begin{array}{c}
+\xi_1\\
+\vdots \\
+\xi_r\\
+\xi_{r+1}\\
+\vdots \\
+\xi_n
+\end{array}
+\right)=\\
+\\
+\multicolumn{1}{c}{
+=\lambda_1\xi_1^2 + \lambda_2\xi_2^2+\ldots+\lambda_r\xi_r^2.}
+\end{array}
+\]
+}
+}
+\alt<13>{\qedhere}{\phantom\qedhere}
+\end{proof}
+
+}
+
+
+\frame{
+\frametitle{Закон инерции квадратичных форм}
+\begin{theorems}[закон инерции квадратичных форм]
+\normalfont
+\parbox{\textwidth}{
+При представлении квадратичной формы в виде суммы независимых квадратов,  \pause указанном выше, число положительных и отрицательных коэффициентов перед квадратами \pause  переменных не зависит от представления.
+}
+\end{theorems}
+}
+
+\frame{
+\frametitle{Закон инерции квадратичных форм}
+\begin{proof}
+\only<1-7>{
+\parbox{\textwidth}{
+Пусть $A(x,x)$ -- квадратичная форма,  \pause приведена к сумме квадратов с помощью двух преобразований $x=T\xi$, $x=Q\eta$: \pause 
+\[
+A(\xi,\xi) = \sum\limits_{i=1}^r a_i \xi_i^2,\quad
+A(\eta,\eta) = \sum\limits_{i=1}^r b_i \eta_i^2,
+\] \pause 
+где $Q$, $T$ -- квадратные неособенные матрицы. \pause 
+Пусть среди коэффициентов $a_i$ и $b_j$  \pause различное число положительных и отрицательных слагаемых: \pause 
+\[
+\begin{array}{c}
+\overbrace{a_1, a_2,\ldots, a_h}^{>0}, \overbrace{a_{h+1},\ldots, a_g, a_{g+1},\ldots, a_{r}}^{<0}\\
+\underbrace{b_1, b_2,\ldots, b_h, b_{h+1},\ldots,b_g}_{>0}, \underbrace{b_{g+1},\ldots, b_{r}}_{<0}\\
+\end{array}\quad
+(h<g\leq r).
+\]
+}
+}
+\only<8-11>{
+\parbox{\textwidth}{
+Рассмотрим равенство 
+\[
+A(x,x)=\overbrace{\sum\limits_{i=1}^h a_i \xi_i^2}^{\geq 0}+\overbrace{\sum\limits_{i=h+1}^r a_i \xi_i^2}^{\leq 0}=
+\overbrace{\sum\limits_{i=1}^g b_i \eta_i^2}^{\geq 0}+
+\overbrace{\sum\limits_{i=g+1}^r b_i \eta_i^2}^{\leq 0},  
+\]
+}
+\only<9-11>{ 
+где $x=T\xi=Q\eta$.
+}
+\only<10-11>{ 
+Выберем такой набор $x_j$, чтобы
+\begin{center}
+$\xi_1=\xi_2=\ldots=\xi_h=0,\quad \eta_{g+1}=\eta_{g+2}=\ldots=\eta_{r}=0$,\\
+$\xi_j\neq 0$ для некоторого $j$ ($h<j\leq r$).
+\end{center}
+}
+\only<11>{ 
+Тогда в верхнем равенстве с одной стороны получится, что $A(x,x) < 0$, а с другой $A(x,x)\geq 0$, чего не может быть, значит $h=g$.
+}
+}
+\only<12->{
+\parbox{\textwidth}{
+Рассмотрим систему из $n$ линейных уравнений от $2n$ неизвестных $\xi_i$ и $\eta_i$ ($i=\overline{1,n}$) 
+}
+}
+\only<13->{
+\[
+T\xi-Q\eta=0
+\]
+и $h+r-g$ дополнительных линейных соотношений
+\begin{center}
+$\xi_1=\xi_2=\ldots=\xi_h=0,\quad \eta_{g+1}=\eta_{g+2}=\ldots=\eta_{r}=0$.
+\end{center}
+}
+\only<14->{
+\parbox{\textwidth}{
+Так как $r-(g-h) < n$, то ранг матрицы суммарной системы с дополнительными соотношениями меньше числа неизвестных, поэтому существует нетривиальное решение, позволяющее считать $\xi_j\neq 0$ для некоторого $j$ ($h<j\leq r$).
+}
+}
+\alt<3>{\qedhere}{\phantom\qedhere}
+\end{proof}
+}
+
+
+\frame{
+\frametitle{Метод выделения квадратов Лагранжа}
+\parbox{\textwidth}{
+При выделении квадратов в квадратичной форм возможны два случая: \pause
+\begin{enumerate}
+\item Для некоторого $g\leq n$ $a_{gg}\neq 0$, тогда исключаем $x_g$ по формуле \pause
+\[
+A(x,x)=\frac{1}{a_{gg}}\left(\sum\limits_{k=1}^na_{gk}x_k\right)^2+A_1(x,x).  \pause
+\]
+\item Пусть $a_{gg}=$ и $a_{hh}=0$, но $a_{gh}=a_{hg}\neq 0$,  \pause
+тогда
+\[
+A(x,x)=\frac{1}{2a_{hg}}\left[\sum\limits_{k=1}^n (a_{gk}+a_{hk})x_k\right]^2-\frac{1}{2a_{hg}}\left[\sum\limits_{k=1}^n (a_{gk}-a_{hk})x_k\right]^2+
+\]
+\[
++A_2(x,x).
+\]
+
+\end{enumerate}
+}
+}
+
+\frame{
+\frametitle{Теорема Якоби}
+\begin{theorems}[Теорема Якоби]
+\normalfont\scriptsize
+\parbox{\textwidth}{
+Пусть квадратичная форма имеет вид   \pause 
+\[
+A(x,x)=\sum\limits_{i,k=1}^n a_{ik}x_ix_k \quad  (a_{ik}=a_{ki}),
+\] \pause 
+и пусть главные миноры соответствующей ей матрицы $A$ \pause 
+\[
+D_1=a_{11},\quad   \pause 
+D_2=
+\begin{pmatrix}
+1 & 2\\
+1 & 2 \\
+\end{pmatrix}, \pause 
+\ldots,
+D_n=
+\begin{pmatrix}
+1 & 2 & \ldots & n\\
+1 & 2 & \ldots & n\\
+\end{pmatrix}, \pause 
+\] 
+все отличны от нуля.  \pause Тогда существуют линейные формы $\xi_i=\sum\limits_{k=1}^n\alpha_{ik}x_k$, \pause 
+для которых квадратичная форма запишется в виде  \pause 
+\[
+A(\xi,\xi)=\frac{D_0}{D_1}\xi_1^2+\frac{D_1}{D_2}\xi_2^2+\ldots+\frac{D_{n-1}}{D_n}\xi_n^2, \quad D_0=1.
+\]
+(без доказательства)
+}
+\end{theorems}
+}
+
+
+\frame{
+\frametitle{Положительно определенные квадратичные формы}
+\begin{dfn}
+\parbox{\textwidth}{
+Вещественная квадратичная форма $A(x,x)$ называется \alert{положительно определенной},  \pause если для любых значений переменных $x_1, \ldots ,x_n$,  \pause не равных одновременно $0$, \pause  она принимает только положительные значения. \pause 
+}
+\end{dfn}
+
+\begin{theorems}
+\normalfont
+\parbox{\textwidth}{
+Если положительно определенная квадратичная форма приведена к сумме квадратов,  \pause то все коэффициенты перед квадратами всегда больше $ 0 $  \pause и количество квадратов равно количеству переменных.
+}
+\end{theorems}
+
+}
+
+\frame{
+\frametitle{Представление квадратичной формы в виде суммы квадратов}
+\begin{proof}
+\parbox{\textwidth}{
+Предположим, положительно определенная квадратичная форма $A(x,x)$ приведена к сумме квадратов  \pause с помощью линейного преобразования $x=T\xi$,  \pause тогда
+\[
+A(x,x)=A(\xi,\xi)=\sum\limits_{i=1}^n a_{i} \xi_i^2.
+\] \pause 
+Предположим, что  $a_j \leq 0$ при некотором $j$.  \pause Тогда рассмотрим вектор $\xi^0=\{0,\ldots,0,\underbrace{1}_{\text{\tiny j-е место}},0,\ldots,0\}$  \pause и  $x^0=T\xi^0\neq 0$.  \pause С одной стороны $A(x^0,x^0)>0$,  т.к. форма положительно определена,  \pause с другой $A(\xi^0,\xi^0)\leq 0$ из за выбора $\xi_0$.
+}
+\end{proof}
+}
+
+\frame{
+\frametitle{Критерий Сильвестера}
+\begin{theorems}[критерий Сильвестера]
+\normalfont
+\parbox{\textwidth}{
+Для того чтобы квадратичная форма
+\[
+A(x,x)=\sum\limits_{i,k=1}^na_{ik}x_ix_k
+\] \pause 
+была положительно определенной,  \pause необходимо и достаточно, чтобы все главные миноры формы были положительные.\\
+(Доказательство вытекает из теоремы Якоби.)
+}
+\end{theorems}
+}
+
+
+\end{document}
+
+%\begin{columns}и
+%\begin{column}{0.5\textwidth}
+%\end{column}
+%
+%\begin{column}{0.5\textwidth}
+%\end{column}
+%
+%
+%\end{columns}
