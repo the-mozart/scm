@@ -1,0 +1,716 @@
+\documentclass{beamer}
+
+\usepackage{beamerthemesplit}
+\usetheme{Singapore} %Copenhagen}
+%\usecolortheme{whale}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+
+\usepackage{textcomp}
+\usepackage{amssymb,amsmath}
+%\usepackage{animate}
+%\usepackage{longtable}
+\usepackage{xcolor}
+
+\newcounter{N}
+
+%% Форматирование окружения itemize
+%\usepackage{ragged2e}
+%\let\olditem\item
+%\renewcommand\item{\olditem\justifying}
+
+
+\title[]{Линейные операторы в $n$-мерном пространстве}
+
+\author[]{ {\em Верещагин Антон Сергеевич}
+	\\
+	канд. физ.-мат. наук, доцент\\
+	\bigskip
+	Кафедра аэрогидродинамики ФЛА НГТУ
+}
+%
+%\date[]{Новосибирск -- 2016}
+
+\newtheorem{dfn}{Определение}  
+\newtheorem{theorems}{Теорема}  
+
+\newcommand{\Rn}{\mathrm{R}^n}
+\newcommand{\Sm}{\mathrm{S}^m}
+\newcommand{\Ql}{\mathrm{Q}^l}
+
+\newcommand{\Rd}[1]{\mathbb{R}^{#1}}
+\newcommand{\Vn}{\mathrm{V}^n}
+
+
+\newcommand{\oper}[1]{\mathcal{#1}}
+
+\begin{document}
+\frame{\titlepage}
+
+
+\frame{
+\frametitle{Аннотация}
+\parbox{\textwidth}{
+Линейные операторы в $n$-мерном пространстве. Подобные матрицы. Определитель оператора. Обратный оператор. Характеристические числа и собственные векторы линейного оператора. Две теоремы о собственных векторах. Линейные операторы простой структуры.
+}
+}
+
+\frame{
+\frametitle{Векторное пространство}
+
+\begin{dfn}
+%\rm
+\parbox{\textwidth}{
+Линейный оператор $\oper{A}:\Rn \to \Rn$, отображающий $n$-мерное векторное пространство  $\Rn$ само в себя, называется \alert{линейным оператором в $\Rn$}.
+}
+\end{dfn}
+
+
+\medskip
+\begin{exampleblock}{\only<2->{Особенности линейных операторов над $\Rn$}}
+\begin{enumerate}
+
+\item<3-> Cуществует оператор $\oper{E}$ (называемый единичным) такой, что  для любого вектора $\vec{x}$  из $R^n$ 
+\[
+	\oper{E}\vec{x}=\vec{x}.
+\]
+
+\item<4-> Для любого оператора $\oper{A}$ из $R^n$ справедливо соотношение
+\[
+	\oper{A}\oper{E}=\oper{E}\oper{A}=\oper{A}.
+\]
+\end{enumerate} 
+
+\end{exampleblock}
+
+}
+
+\frame{
+\frametitle{О матрице соответствующей линейному оператору в $\Rn$}
+
+\parbox{\textwidth}{
+Выберем базис в $\Rn$: $\vec{e_1}$, ..., $\vec{e_n}$. 
+\pause В этом базисе оператору $\oper{A}$ соответствует квадратная $n\times n$ матрица $A$.
+\pause Столбцы этой матрицы составлены из координат вектора $\oper{A}\vec{e_j}$ в базисе $\vec{e_i}$ $i,j=\overline{1,n}$.
+
+\pause
+\[
+A =  \left(
+\begin{array}{c|c|c|c}
+\oper{A}\vec{e}_1 & \oper{A}\vec{e}_2 & \ldots & \oper{A}\vec{e}_n\\
+\end{array}\right)=
+\left(
+\begin{array}{cccc}
+a_{11} & a_{12} & \ldots & a_{1n} \\
+a_{21} & a_{22} & \ldots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots\\
+a_{n1} & a_{n2} & \ldots & a_{nn} \\
+\end{array}\right)
+\]
+
+}
+}
+
+\frame{
+\frametitle{О действиях над линейными операторами в $\Rn$}
+
+\begin{theorems}
+\rm
+\parbox{\textwidth}{
+Пусть $\oper{A}$, $\oper{B}$, $\oper{C}$ -- линейные операторы в $\Rn$.
+\pause
+Пусть $A$, $B$, $C$ -- $n\times n$ матрицы соответствующие линейным операторам $\oper{A}$,
+ $\oper{B}$, $\oper{C}$,
+\pause а $x$ -- вектор столбец из координат вектора $\vec{x}$, 
+ в  базисе $\vec{e_i}$ ($i=\overline{1,n}$) и $\alpha \in \mathbb{R}$, тогда 
+\pause 
+\begin{itemize}
+\item   $\oper{C}=\oper{A}+\oper{B}\quad \Leftrightarrow \quad C=A+B$;
+\pause 
+\item   $\oper{C}=\oper{A}\oper{B}\quad \Leftrightarrow \quad C=AB$;
+\pause 
+\item   $\oper{C}=\alpha\oper{A}\quad \Leftrightarrow \quad C=\alpha A$.
+\end{itemize}
+
+(Доказательство вытекает из определения операций).
+}
+\end{theorems}
+
+\begin{exampleblock}{Следствие}
+\parbox{\textwidth}{
+Множество линейных операторов линейно относительно сложения и умножения на число.
+}
+\end{exampleblock}
+}
+
+\frame{
+\frametitle{О представлении единичного оператора в виде матрицы}
+
+Пусть $\oper{E}$ -- единичный оператор в $\Rn$, \pause т.е. $\forall \vec{x}\in\Rn$ $\oper{E}\vec{x}=\vec{x}$.
+
+\pause
+Пусть $\vec{x}=x_1\vec{e}_1+x_2\vec{e}_2+\ldots+x_n\vec{e}_n$ \pause -- разложение вектора $\vec{x}$ по базису пространства $\Rn$ $\vec{e_i}$ $i=\overline{1,n}$.
+
+\pause
+Тогда 
+\[
+\begin{array}{lcl}
+\oper{E}\vec{e}_1 &  =  & 1 \cdot \vec{e}_1 + 0\cdot\vec{e}_2+\ldots+0\cdot\vec{e}_n\\
+\pause
+\oper{E}\vec{e}_2 &  =  & 0 \cdot \vec{e}_1 + 1\cdot\vec{e}_2+\ldots+0\cdot\vec{e}_n\\
+\vdots &  &  \\
+\pause
+\oper{E}\vec{e}_n &  =  & 0 \cdot \vec{e}_1 + 0\cdot\vec{e}_2+\ldots+1\cdot\vec{e}_n
+\end{array}
+\]
+
+\pause
+Следовательно оператору $\oper{E}$ соответствует единичная матрица:
+\pause
+\[
+E=\left(
+\begin{array}{cccc}
+1 & 0 & \ldots & 0 \\
+0 & 1 & \ldots & 0 \\
+\vdots & \vdots & \ddots & \vdots\\
+0 & 0 & \ldots & 1 \\
+\end{array}\right).
+\]
+
+
+}
+
+\frame{
+\frametitle{О подобных матрицах}
+
+\begin{dfn}
+%\rm
+\parbox{\textwidth}{
+Две матрицы $A$ и $B$, \pause связанные соотношением $B=TAT^{-1}$, \pause называются \alert{подобными}, \pause где $T$ -- неособенная матрица.
+}
+\end{dfn}
+
+\pause
+\begin{theorems}
+\rm
+\parbox{\textwidth}{
+Пусть $\oper{A}$ -- линейный оператор в $\Rn$, \pause
+$A$ -- матрица, соответствующая оператору  $\oper{A}$ \pause в базисе  $\vec{e}_i$ ($i=\overline{1,n}$), \pause а $A'$ -- матрица, соответствующая оператору  $\oper{A}$ \pause в базисе  $\vec{g}_i$ ($i=\overline{1,n}$). \pause Тогда матрицы $A$ и $A'$ подобны. 
+}
+\end{theorems}
+
+
+
+
+}
+
+\frame{
+\frametitle{О подобных матрицах}
+\begin{proof}
+\rm
+\parbox{\textwidth}{
+Пусть $T^{\rm{t}}$ -- неособенная матрица перехода \pause между базисами $\vec{e}_i$ и $\vec{g}_j$ ($i,j=\overline{1,n}$). \pause Пусть $\vec{y}=\oper{A}\vec{x}$ -- образ вектора $\vec{x}\in\Rn$. \pause
+Пусть $x$ и $x'$ -- координаты вектора $\vec{x}\in\Rn$, \pause а $y$ и $y'$ -- координаты вектора $\vec{y}\in\Rn$ в заданных базисах. \pause Тогда
+\[
+y=Ax,\quad y'=A'x'.
+\]
+
+\pause
+По теореме о связи векторов в различных базисах
+\[
+y'=Ty,\quad x'=Tx. 
+\]
+
+\pause
+Подставляя выражение для $y'$ и $x'$ в предыдущие соотношения, получаем
+\[
+y=\left(T^{-1}A'T\right)x.
+\]
+\pause
+Т.к. $y=Ax$, то в силу произвольности $\vec{x}$: \alert{$A=T^{-1}A'T$} .
+}
+\end{proof}
+}
+
+\frame{
+\frametitle{Определитель линейного оператора в $\Rn$}
+
+\parbox{\textwidth}{
+Пусть $A$ и $B$ -- подобные матрицы. \pause Тогда $A=TBT^{-1}$ для некоторой неособой $T$ \pause и
+\[
+|A|=|TBT^{-1}|=|T||B||T^{-1}|=|T||B|/|T|=|B|.
+\]
+}
+
+\pause
+\begin{dfn}
+%\rm
+\parbox{\textwidth}{
+\alert{Определителем} оператора $\oper{A}:R^n\rightarrow R^n$ \pause называется определитель матрицы преобразования этого оператора в любом базисе. \pause Если $|\oper{A}|=0$, то оператор называется \alert{особенным}, \pause в противном случае $|\oper{A}|\neq 0$ , оператор -- \alert{неособенный}.
+}
+\end{dfn}
+}
+
+\frame{
+\frametitle{Свойства особенного оператора}
+
+\begin{exampleblock}{Свойство}
+\rm
+\parbox{\textwidth}{
+Для особенного оператора $\oper{A}$ \pause  существует такой вектор $\vec{x}\neq 0$ из $\Rn$, \pause что $\oper{A}\vec{x}=0$. \pause
+}
+\end{exampleblock}
+
+\begin{proof}
+\rm
+\parbox{\textwidth}{
+Выберем базис пространства $\Rn$ $\vec{e}_i$ ($i=\overline{1,n}$). \pause Пусть $A$ -- матрица оператора $\oper{A}$ в этом базисе. \pause Тогда операторное уравнение $\oper{A}\vec{x}=0$ \pause равнозначно матричному
+\[
+Ax=0.
+\]
+
+ \pause Оператор $\oper{A}$ особенный, значит $|A| = 0$.  \pause Следовательно матричное уравнение имеет нетривиальное решение $x\neq 0$.\\ \pause 
+\centering
+$\vec{x}=\sum\limits_{i=1}^n x_i \vec{e}_i \neq 0$ --- решение операторного уравнения.
+
+
+
+}
+\end{proof}
+
+}
+
+\frame{
+\frametitle{Свойства неособенного оператора}
+
+\begin{theorems}
+\rm
+\parbox{\textwidth}{
+
+Неособенный оператор  $\oper{A}$ в $\Rn$ имеет следующие свойства:\pause
+\begin{enumerate}
+\item Из равенства $\oper{A}\vec{x}=0$ всегда следует, что $\vec{x}=0$.\pause
+\item $\oper{A}\Rn=\Rn$ (полнота).\pause
+\item $\oper{A}\vec{x}=\oper{A}\vec{y}\quad\Leftrightarrow\quad \vec{x}=\vec{y}$ (взаимнооднозначность).
+\end{enumerate}
+
+}
+\end{theorems}
+
+}
+
+\frame{
+\frametitle{1. $\oper{A}\vec{x}=0\quad \Rightarrow \quad\vec{x}=0$}
+
+\begin{proof}
+\rm
+\parbox{\textwidth}{
+Выберем базис пространства $\Rn$ $\vec{e}_i$ ($i=\overline{1,n}$).  \pause Пусть $A$ -- матрица оператора $\oper{A}$ в этом базисе. \pause  Тогда операторное уравнение $\oper{A}\vec{x}=0$ равнозначно матричному
+\[
+Ax=0.
+\] \pause 
+Оператор $\oper{A}$ неособенный, значит $|A|\neq 0$.  \pause Следовательно матричное уравнение имеет только одно решение $x=0$ и, следовательно, $\vec{x}=0$.
+
+}
+\end{proof}
+}
+
+\frame{
+\frametitle{2. $\oper{A}\Rn=\Rn$ (полнота)}
+
+\begin{proof}
+\rm
+\parbox{\textwidth}{
+Нужно показать, что областью определения линейного неособенного оператора является всё $\Rn$. \pause 
+Выберем базис пространства $\Rn$ $\vec{e}_i$ ($i=\overline{1,n}$).  \pause Пусть $A$ -- матрица оператора $\oper{A}$ в этом базисе.  \pause Нужно показать, что операторное уравнение $\oper{A}\vec{x}=\vec{y}$ имеет решение для любого вектора $\vec{y}\in\Rn$.  \pause Пусть $x$, $y$ -- вектор-столбцы координат векторов $\vec{x}$, $\vec{y}$ в выбранном базисе соответственно.  \pause В матричном виде уравнение $\oper{A}\vec{x}=\vec{y}$ имеет вид
+\[
+Ax=y.
+\] \pause 
+Оператор $\oper{A}$ неособенный, значит $|A|\neq 0$.  \pause Следовательно матричное уравнение имеет решение вида $x=A^{-1}y$. \\ \pause
+\centering
+$\vec{x}=\sum\limits_{i=1}^n x_i \vec{e}_i \neq 0$ --- решение операторного уравнения.
+}
+\end{proof}
+}
+
+\frame{
+\frametitle{3. $\oper{A}\vec{x}=\oper{A}\vec{y}\quad\Leftrightarrow\quad \vec{x}=\vec{y}$ (взаимнооднозначность)}
+
+\begin{proof}
+\rm
+\parbox{\textwidth}{
+Выберем базис пространства $\Rn$ $\vec{e}_i$ ($i=\overline{1,n}$).  \pause Пусть $A$ -- матрица оператора $\oper{A}$ в этом базисе.  \pause 
+\begin{itemize}
+\item Пусть  $\oper{A}\vec{x}=\oper{A}\vec{y}$, т.е.  $\oper{A}(\vec{x}-\vec{y})=0$.  \pause Тогда из пункта 1 для неособенного оператора следует, что $\vec{x}-\vec{y}=0$ или $\vec{x}=\vec{y}$. \pause 
+\item Оператор $\oper{A}$ является однозначной функцией и не может принимать различные значения. 
+\end{itemize}
+}
+\end{proof}
+}
+
+\frame{
+\frametitle{Обратный оператор}
+
+Из доказанных свойств вытекает следующая теорема 
+
+
+\begin{theorems}
+\rm
+\parbox{\textwidth}{
+Неособенный оператор  $\oper{A}$ в $\Rn$ имеет обратный оператор такой, что:
+\[
+\oper{A}^{-1}(\oper{A}\vec{x}) = \vec{x},
+\] \pause 
+т.е. 
+\[
+\oper{A}\oper{A}^{-1}=\oper{A}^{-1}\oper{A}=\oper{E}.
+\]
+Оператор $\oper{A}^{-1}$ является линейным оператором.  \pause 
+}
+\end{theorems}
+
+}
+
+\frame{
+\frametitle{Линейность обратного оператора}
+
+\begin{proof}
+\rm
+\parbox{\textwidth}{
+Пусть $\vec{y}=\oper{A}\vec{x}$, $\vec{u}=\oper{A}\vec{w}$,  \pause и $\oper{A}$ неособенный оператор в $\Rn$. \pause 
+\[
+\begin{array}{c}
+\alpha\vec{y}+\beta\vec{u}= \pause \alpha\oper{A}\vec{x}+\beta\oper{A}\vec{w}= \pause \oper{A}(\alpha\vec{x}+\beta\vec{w})\\ \pause 
+\Downarrow \\
+\oper{A}^{-1}(\alpha\vec{y}+\beta\vec{u})=\alpha\vec{x}+\beta\vec{w}= \pause \alpha\oper{A}^{-1}\vec{y}+\beta\oper{A}^{-1}\vec{u}.
+\end{array}
+\]
+
+}
+\end{proof}
+}
+
+\frame{
+\frametitle{Матрица обратного оператора}
+
+\begin{theorems}
+\rm
+\parbox{\textwidth}{
+Если в некотором базисе оператору $\oper{A}$ отвечает матрица $A$, \pause  тогда в этом же базисе оператору $\oper{A}^{-1}$ будет отвечать матрица $A^{-1}$.
+}
+\end{theorems}
+
+}
+
+
+\frame{
+\frametitle{Матрица обратного оператора}
+
+\begin{proof}
+\rm
+\parbox{\textwidth}{
+Пусть $\oper{A}$ неособенный оператор в $\Rn$.  \pause Пусть $\oper{A}^{-1}$ -- обратный оператор к $\oper{A}$. \pause  Пусть $A$ -- матрица оператора $\oper{A}$, $B$ -- матрица оператора $\oper{A}^{-1}$ в некотором базисе, \pause  тогда
+\[
+\oper{A}^{-1}(\oper{A}\vec{x}) = \vec{x}=\oper{E}\vec{x}.
+\] \pause 
+
+Таким образом, $\oper{A}^{-1}\oper{A}=\oper{E}$, и, в матричном виде
+\[
+BA=E,
+\]
+т.е. 
+\[
+B=A^{-1}.
+\]
+}
+\end{proof}
+}
+
+\frame{
+
+\frametitle{Характеристические числа и собственные векторы}
+
+\begin{dfn}
+%\rm
+\parbox{\textwidth}{
+Пусть $\oper{A}$ -- линейный оператор в $\Rn$,  \pause тогда числа $\lambda$ и векторы $\vec{x}$, \pause  удовлетворяющие равенству
+\[
+\oper{A}\vec{x}=\lambda\vec{x} \quad (\vec{x}\neq \vec{0}),
+\] \pause 
+называются \alert{собственными (характеристическими) числами}  \pause и соответствующие им векторы -- \alert{собственными векторами} линейного оператора $\oper{A}$. 
+}
+\end{dfn}
+}
+
+\frame{
+\frametitle{Харастеристический многочлен}
+\parbox{\textwidth}{
+\[
+\oper{A}\vec{x}=\lambda\vec{x}  \pause 
+\Leftrightarrow 
+\oper{A}\vec{x}=(\lambda\oper{E})\vec{x} \pause 
+\Leftrightarrow
+\left(\oper{A}-\lambda\oper{E}\right)\vec{x}=0. \pause 
+\]
+
+Вектор $\vec{x}\neq 0$ и число $\lambda$ существует,  \pause когда $|\oper{A}-\lambda\oper{E}|$=0,  \pause или в некотором базисе 
+\[
+\chi(\lambda)= \pause 
+|A-\lambda E|= \pause 
+\begin{vmatrix}
+a_{11}-\lambda & a_{12} & \ldots & a_{1n} \\
+a_{21} & a_{22}-\lambda & \ldots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{n1} & a_{n2} & \ldots & a_{nn}-\lambda 
+\end{vmatrix}
+=0.
+\] \pause 
+
+\begin{dfn}
+%\rm
+\parbox{\textwidth}{
+Функция $\chi(\lambda)$, приведенного вида,  \pause называется \alert{характеристическим} \alert{многочленом} (характеристической функцией) оператора $\oper{A}$.
+}
+\end{dfn}
+}
+}
+
+\frame{
+\frametitle{Независимость характеристического многочлена от выбора базиса}
+\begin{theorems}
+\rm
+\parbox{\textwidth}{
+Вид характеристического многочлена линейного оператора $\oper{A}$ в $\Rn$ не зависит от выбора базиса.
+}
+\end{theorems} \pause 
+
+\begin{proof}
+\rm
+\parbox{\textwidth}{
+Пусть $A$ и $A'$ -- матрицы,  \pause соответствующие оператору $\oper{A}$ в различных базисах пространства $\Rn$.  \pause По свойству они подобны,  \pause значит существует $|T|\neq 0$: $A=TA'T^{-1}$,  \pause тогда
+\[
+|A-\lambda E|= \pause |TA'T^{-1}-T\lambda ET^{-1}|= \pause |T(A'-\lambda E)T^{-1}| = \pause  
+\]
+\[
+=|T||A'-\lambda E||T^{-1}|=  \pause  |T||A'-\lambda E|/|T|= \pause |A'-\lambda E|.
+\]
+}
+\end{proof}
+
+}
+
+
+\frame{
+\frametitle{Алгоритм поиска собственных чисел и собственных векторов линейного оператора $\oper{A}$ в $\Rn$}
+ \pause 
+\begin{enumerate}
+\item Выбирается базис в $\Rn$. \pause 
+\item Находим матрицу $A$, соответствующую $\oper{A}$ в выбранном базисе. \pause 
+\item Находим собственные значения из решения уравнения 
+\[
+\chi(\lambda)=0.
+\] \pause 
+\item Для каждого найденного $\lambda$ находим пространство решений $x$ из соотношения
+\[
+(A-\lambda E)x = 0.
+\]
+\end{enumerate}
+
+
+}
+
+\frame{
+\frametitle{Свойства собственных векторов}
+
+\begin{theorems}
+\rm
+\parbox{\textwidth}{
+Если $\vec{x}$, $\vec{y}$ -- собственные векторы оператора $\oper{A}$,  \pause  соответствующие одному и тому же собственному числу $\lambda$,  \pause то их линейная комбинация также является собственным вектором для этого же числа $\lambda$. \pause 
+}
+\end{theorems}
+
+\begin{proof}
+\rm
+\parbox{\textwidth}{
+Из условия теоремы $\oper{A}\vec{x}=\lambda\vec{x}$,  $\oper{A}\vec{y}=\lambda\vec{y}$.  \pause Умножим первое соотношение на $\alpha$, второе на $\beta$, сложим, \pause и, пользуясь линейностью, произведем преобразования
+\[
+\begin{array}{c}
+\alpha\oper{A}\vec{x}+\beta\oper{A}\vec{y}= \pause \alpha\lambda\vec{x}+\beta\lambda\vec{y}\\ \pause 
+\oper{A}(\alpha\vec{x}+\beta\vec{y})= \pause \lambda(\alpha\vec{x}+\beta\vec{y}). \pause 
+\end{array}
+\]
+Следовательно вектор $\alpha\vec{x}+\beta\vec{y}$ для любых $\alpha,\beta \in {\rm R}$  \pause  также является собственным вектором $\oper{A}$, соответствующим собственному числу $\lambda$.   
+}
+\end{proof}
+}
+
+
+
+
+\frame{
+\frametitle{Свойства собственных векторов}
+
+\begin{theorems}
+\rm
+\parbox{\textwidth}{
+Собственные векторы соответствующие различным собственным числам являются линейно независимыми.
+}
+\end{theorems} \pause 
+\begin{proof}
+\rm
+\parbox{\textwidth}{
+Пусть $\vec{x}_1$, \ldots, $\vec{x}_k$ -- собственные векторы,  \pause соответствующие собственным числам $\lambda_1$,\ldots,$\lambda_k$,  \pause причем $\lambda_i\neq\lambda_j$ ($i\neq j$). \pause 
+
+Предположим, что существует линейная комбинация 
+\[
+\vec{l}(\alpha_i,\vec{x}_j)=\alpha_1\vec{x}_1+\alpha_2\vec{x}_2 + \ldots + \alpha_k\vec{x}_k=0 \quad (\alpha_k\neq 0).
+\] \pause 
+Подействуем линейными операторами $\oper{A}-\lambda_j\oper{E}$ ($j=\overline{1,k-1}$) на $\vec{l}(\alpha_i,\vec{x}_j)$: \pause 
+\[
+(\oper{A}-\lambda_{k-1}\oper{E})\ldots(\oper{A}-\lambda_{2}\oper{E})(\oper{A}-\lambda_{1}\oper{E})\vec{l}(\alpha_i,\vec{x}_j).
+\]
+
+}
+\end{proof}
+}
+
+
+\frame{
+\frametitle{Свойства собственных векторов}
+\begin{proof}
+\rm
+\parbox{\textwidth}{
+
+\[
+\begin{array}{l}
+(\oper{A}-\lambda_1\oper{E})(\alpha_1\vec{x}_1+\alpha_2\vec{x}_2 + \ldots + \alpha_k\vec{x}_k)= \\ \pause 
+=\alpha_1(\oper{A}-\lambda_1\oper{E})\vec{x}_1+ \pause \alpha_2(\oper{A}-\lambda_1\oper{E})\vec{x}_2+\ldots+ \pause 
+\alpha_k(\oper{A}-\lambda_1\oper{E})\vec{x}_k=\\ \pause 
+=\alpha_2(\lambda_2-\lambda_1)\vec{x}_2+ \pause \alpha_3(\lambda_3-\lambda_1)\vec{x}_3+ \pause \ldots+
+\alpha_k(\lambda_k-\lambda_1)\vec{x}_k=0\\ \pause 
+\\
+(\oper{A}-\lambda_2\oper{E})(\alpha_2(\lambda_2-\lambda_1)\vec{x}_2+\alpha_3(\lambda_3-\lambda_1)\vec{x}_3+ \ldots+
+\alpha_k(\lambda_k-\lambda_1)\vec{x}_k)=\\ \pause 
+=
+\alpha_3(\lambda_3-\lambda_1)(\lambda_3-\lambda_2)\vec{x}_3+ \pause \ldots+
+\alpha_k(\lambda_k-\lambda_1)(\lambda_k-\lambda_2)\vec{x}_k)=0\\ \pause 
+\vdots \\
+\alpha_k(\lambda_k-\lambda_1)(\lambda_k-\lambda_2)\ldots(\lambda_k-\lambda_{k-1}) \vec{x}_k=0
+\end{array}
+\] \pause 
+Последнее равенство невозможно в силу того, \pause  что $\alpha_k\neq 0$ (из предположения от противного); \pause  $\lambda_k-\lambda_i \neq 0$, т.к. $\lambda_i \neq \lambda_j$ ($i\neq j$);  \pause $\vec{x_k}\neq 0$ по определению собственного вектора.  \pause 
+
+Следовательно векторы $\vec{x}_1$, \ldots, $\vec{x}_k$ линейно независимы. 
+}
+\end{proof}
+}
+
+\frame{
+\frametitle{Линейный оператор простой структуры}
+\rm
+\begin{dfn}
+\parbox{\textwidth}{
+Линейный оператор $\oper{A}$ в пространстве $\Rn$ \pause  называется \alert{оператором простой структуры},  \pause если он имеет $n$ различных собственных чисел.
+}
+\end{dfn} \pause 
+
+\begin{exampleblock}{Вид оператора простой структуры} \pause 
+\parbox{\textwidth}{
+Пусть линейный оператор $\oper{A}$ в пространстве $\Rn$  \pause имеет $n$ различных собственных векторов $\vec{x}_i$,  \pause соответствующие различным собственным числам $\lambda_i$ ($i=\overline{1,n}$).  \pause По только что доказанной теореме система из $n$ векторов $\vec{x}_i$ ($i=\overline{1,n}$) линейно независима,  \pause а значит является базисом.  \pause Получим вид матрицы $A$ в этом базисе.
+}
+\end{exampleblock}
+}
+
+\frame{
+\frametitle{Вид оператора простой структуры}
+
+\begin{exampleblock}{\parbox{\textwidth}{Разложение образов базисных векторов по базису пространства $\Rn$}}
+\pause
+\[
+\begin{array}{ccl}
+\oper{A}\vec{x}_1 &  =  & \lambda_1 \cdot \vec{x}_1 + 0\cdot\vec{x}_2+\ldots+0\cdot\vec{x}_n,\\ 
+\pause
+\oper{A}\vec{x}_2 &  =  & 0 \cdot \vec{x}_1 + \lambda_2\cdot\vec{x}_2+\ldots+0\cdot\vec{x}_n,\\ 
+\vdots &  &  \\
+\pause
+\oper{A}\vec{x}_n &  =  & 0 \cdot \vec{x}_1 + 0\cdot\vec{x}_2+\ldots+\lambda_n\cdot\vec{x}_n.
+\end{array}
+\]
+\end{exampleblock}\pause
+
+\begin{exampleblock}{Матрица оператора $\oper{A}$ в базисе $\vec{x}_i$ ($i=\overline{1,n}$)}
+\pause
+\[
+A=\left(
+\begin{array}{cccc}
+\lambda_1 & 0 & \ldots & 0 \\
+0 & \lambda_2 & \ldots & 0 \\
+\vdots & \vdots & \ddots & \vdots\\
+0 & 0 & \ldots & \lambda_n \\
+\end{array}\right).
+\]
+\end{exampleblock}
+
+
+}
+
+
+\frame{
+\frametitle{Свойства собственных векторов}
+
+\begin{theorems}[без доказательства]
+\rm
+\parbox{\textwidth}{
+Все характеристические числа вещественной симметричной матрицы вещественны, \pause  и существует базис из ортонормированных собственных векторов. \pause 
+}
+\end{theorems}
+
+\begin{exampleblock}{Пример.}
+\[
+A=\left(
+\begin{array}{cc}
+1 & 2 \\
+2 & 1
+\end{array}
+\right). \pause 
+\]
+\[
+\chi(\lambda)=
+\left|
+\begin{array}{cc}
+1-\lambda & 2 \\
+2 & 1-\lambda
+\end{array}
+\right|= \pause 
+(1-\lambda)^2-4=0  \pause \Leftrightarrow \lambda_{1}=3,\quad\lambda_{2}=-1.
+\] \pause 
+\[
+\begin{array}{ccll}
+\vec{g}_1 & = &  (1/\sqrt{2},& 1/\sqrt{2}), \\ \pause 
+\vec{g}_2 & = & (-1/\sqrt{2},& 1/\sqrt{2}).  \pause 
+\end{array}
+\]
+\[
+\vec{g}_1\cdot\vec{g}_2 = 0,\quad
+\vec{g}_1\cdot\vec{g}_1 = 1,\quad
+\vec{g}_2\cdot\vec{g}_2 = 1.
+\]
+\end{exampleblock}
+
+
+}
+
+
+\end{document}
+%\begin{columns}и
+%\begin{column}{0.5\textwidth}
+%\end{column}
+%
+%\begin{column}{0.5\textwidth}
+%\end{column}
+%
+%
+%\end{columns}
