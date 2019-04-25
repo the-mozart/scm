@@ -1,0 +1,374 @@
+\documentclass{beamer}
+
+\usepackage{beamerthemesplit}
+\usetheme{Singapore} %Copenhagen}
+%\usecolortheme{whale}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+
+\usepackage{textcomp}
+\usepackage{amssymb,amsmath}
+%\usepackage{animate}
+%\usepackage{longtable}
+\usepackage{xcolor}
+
+%\usepackage{pstricks}
+
+\newcounter{N}
+
+%% Форматирование окружения itemize
+%\usepackage{ragged2e}
+%\let\olditem\item
+%\renewcommand\item{\olditem\justifying}
+
+
+\title[]{Операции с тензорами}
+
+\author[]{к.ф.-м.н. {\em Верещагин Антон Сергеевич}\\
+%Институт теоретической и прикладной механики\\ им.~С.~А.~Христиановича СО РАН\\
+\bigskip
+\bigskip
+\bigskip
+\bf Лекция 10\\
+\bigskip
+}
+
+\newtheorem{dfn}{Определение}  
+\newtheorem{theorems}{Теорема}  
+
+\newcommand{\Rn}{\mathrm{R}^n}
+\newcommand{\Sm}{\mathrm{S}^m}
+\newcommand{\Ql}{\mathrm{Q}^l}
+
+\newcommand{\Rd}[1]{\mathbb{R}^{#1}}
+\newcommand{\Vn}{\mathrm{V}^n}
+
+\newcommand{\oper}[1]{{\bf #1}}
+\newcommand{\basis}[1]{\vec{\bf #1}}
+\newcommand{\dt}[1]{\frac{d #1}{dt}}
+\newcommand{\dtds}[1]{\displaystyle\frac{d #1}{dt}}
+\newcommand{\ds}[1]{\frac{d #1}{ds}}
+\newcommand{\dsds}[1]{\displaystyle\frac{d #1}{ds}}
+\newcommand{\dsd}[1]{\frac{d^2 #1}{ds^2}}
+\newcommand{\pdt}[1]{\frac{\partial #1}{\partial t}}
+\newcommand{\pds}[1]{\frac{\partial #1}{\partial s}}
+\newcommand{\pdx}[1]{\frac{\partial #1}{\partial x}}
+\newcommand{\pdy}[1]{\frac{\partial #1}{\partial y}}
+\newcommand{\pdz}[1]{\frac{\partial #1}{\partial z}}
+\newcommand{\pdxds}[1]{\displaystyle\frac{\partial #1}{\partial x}}
+\newcommand{\pdyds}[1]{\displaystyle\frac{\partial #1}{\partial y}}
+\newcommand{\pdzds}[1]{\displaystyle\frac{\partial #1}{\partial z}}
+\newcommand{\pdn}[1]{\frac{\partial #1}{\partial n}}
+\newcommand{\grad}[1]{\operatorname{grad} #1}
+\newcommand{\gradv}[1]{\basis{i}\pdx{#1}+\basis{j}\pdy{#1}+\basis{k}\pdz{#1}}
+\newcommand{\gradvds}[1]{\basis{i}\pdxds{#1}+\basis{j}\pdyds{#1}+\basis{k}\pdzds{#1}}
+
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+
+\newcommand{\pdxt}[1]{\frac{\partial^2 #1}{\partial x^2}}
+\newcommand{\pdyt}[1]{\frac{\partial^2 #1}{\partial y^2}}
+\newcommand{\pdzt}[1]{\frac{\partial^2 #1}{\partial z^2}}
+
+
+\newcommand{\dv}[1]{\operatorname{div}\vec{#1}}
+\newcommand{\dvdef}[1]{\pdx{#1_x}+\pdy{#1_y}+\pdz{#1_z}}
+\newcommand{\dvdefds}[1]{\pdxds{#1_x}+\pdyds{#1_y}+\pdzds{#1_z}}
+\newcommand{\dvwv}[1]{\operatorname{div} #1}
+\newcommand{\rot}[1]{\operatorname{rot}\vec{#1}}
+\newcommand{\rotpr}[2]{\operatorname{rot}_{#1}\vec{#2}}
+\newcommand{\rotwv}[1]{\operatorname{rot} #1}
+
+\newcommand{\lapl}[1]{\pdxt{#1}+\pdyt{#1}+\pdzt{#1}}
+
+\newcommand{\argq}{(q_1,q_2,q_3)}
+\newcommand{\argx}{(x,y,z)}
+\newcommand{\tensor}[1]{\boldsymbol{#1}}
+
+
+\begin{document}
+
+\frame{\titlepage}
+
+
+\frame{
+\frametitle{Аннотация}
+\parbox{\textwidth}{
+Скалярное и векторное умножение тензора на вектор. Скалярное произведение тензоров.
+}
+}
+
+
+
+\frame{
+\frametitle{Скалярное и векторное умножение тензора на вектор}
+
+\begin{dfn}
+\parbox{\textwidth}{
+Под \alert{скалярным произведением тензора} $ \tensor{\Pi} = \vec{i}_1\vec{p}_1+\vec{i}_2\vec{p}_2+\vec{i}_3\vec{p}_3$ \alert{на вектор} $ \vec{a}=\vec{i}_1a_1+\vec{i}_2a_2+\vec{i}_3a_3 $ \alert{справа} будем понимать вектор $ \vec{a'}'$:
+\[ 
+\vec{a'}=\tensor{\Pi}\cdot\vec{a}=\vec{i}_1(\vec{p}_1\cdot\vec{a})+\vec{i}_2(\vec{p}_2\cdot\vec{a})+\vec{i}_3(\vec{p}_3\cdot\vec{a}).
+\]
+%\[
+%=\vec{i}_1(p_{11}a_1+p_{12}a_2+p_{13}a_3)+\vec{i}_2(p_{21}a_1+p_{22}a_2+p_{23}a_3)+\vec{i}_3(p_{31}a_1+p_{32}a_2+p_{33}a_3).
+%\]
+}
+\end{dfn}
+ \pause 
+
+\begin{dfn}
+\parbox{\textwidth}{
+Под \alert{скалярным произведением вектора} $ \vec{a} $ \alert{на тензор} $ \tensor{\Pi} $ \alert{слева} понимается вектор $ \vec{a''} $:
+\[ 
+\vec{a''}=\vec{a}\cdot\tensor{\Pi}=(\vec{a}\cdot\vec{i}_1)\vec{p}_1+(\vec{a}\cdot\vec{i}_2)\vec{p}_2+(\vec{a}\cdot\vec{i}_3)\vec{p}_3=
+\]
+\[ 
+=a_1\vec{p}_1+a_2\vec{p}_2+a_3\vec{p}_3.
+\]
+}
+\end{dfn}
+}
+
+\frame{
+\frametitle{Диада (повтор)}
+
+\begin{dfn}
+\parbox{\textwidth}{
+Пусть $\vec{a}=\basis{i}_1a_1+\basis{i}_2a_2+\basis{i}_3a_3$ и $\vec{b}=\basis{i}_1b_1+\basis{i}_2b_2+\basis{i}_3b_3$, тогда \alert{диадным} или \alert{тензорными произведением} векторов $\vec{a}$ и $\vec{b}$ называется тензор, определяемый следующим соотношением: 
+\[
+\vec{a}\otimes\vec{b}=
+\vec{a}\vec{b}= 
+\begin{pmatrix}
+a_1b_1 & a_1b_2 & a_1b_3 \\
+a_2b_1 & a_2b_2 & a_2b_3 \\
+a_3b_1 & a_3b_2 & a_3b_3 
+\end{pmatrix}=
+\basis{i}_1(a_1\vec{b})+\basis{i}_2(a_2\vec{b})+\basis{i}_3(a_3\vec{b}).
+\]
+}
+\end{dfn} \pause 
+
+\begin{exampleblock}{Линейность диады по каждому аргументу}
+\[
+(\vec{a}+\vec{b})\vec{c} = \vec{a}\vec{c}+ \vec{b}\vec{c}.
+\]
+\[
+\vec{c}(\vec{a}+\vec{b}) = \vec{c}\vec{a}+ \vec{c}\vec{b}.
+\]
+
+\end{exampleblock}
+
+}
+
+
+\frame{
+\frametitle{Скалярное произведение диады на вектор}
+
+Пусть $\vec{a}$, $\vec{b}$, $\vec{c}$ -- вектора.
+
+\[ 
+(\vec{b}\vec{c})\cdot\vec{a}= \pause 
+(\basis{i}_1b_1\vec{c}+\basis{i}_2b_2\vec{c}+\basis{i}_3b_3\vec{c})\cdot\vec{a}= \pause 
+\basis{i}_1b_1(\vec{c}\cdot\vec{a})+\basis{i}_2b_2(\vec{c}\cdot\vec{a})+\basis{i}_3b_3(\vec{c}\cdot\vec{a})= \pause 
+\]
+\[
+=
+(\basis{i}_1b_1+\basis{i}_2b_2+\basis{i}_3b_3)(\vec{c}\cdot\vec{a})= \pause 
+\vec{b}(\vec{c}\cdot\vec{a}).
+\]
+
+\medskip
+\[ 
+\vec{a}\cdot(\vec{b}\vec{c})= \pause 
+\vec{a}\cdot(\basis{i}_1b_1\vec{c}+\basis{i}_2b_2\vec{c}+\basis{i}_3b_3\vec{c})= \pause 
+a_1b_1 \vec{c} + a_2b_2 \vec{c} + a_3b_3 \vec{c}= \pause 
+\]
+\[
+=
+(a_1b_1 + a_2b_2 + a_3b_3) \vec{c}= \pause 
+(\vec{a}\cdot\vec{b})\vec{c}.
+\]
+}
+
+\frame{
+\frametitle{Векторное произведение тензора на вектор}
+
+\begin{dfn}
+\parbox{\textwidth}{
+Под \alert{векторным произведением тензора} $ \tensor{\Pi} $ \alert{на вектор} $\vec{a}$ \alert{справа} понимается новый тензор $ \tensor{\Pi'} $, вычисленный по формуле:
+\[ 
+\tensor{\Pi'}=\tensor{\Pi}\times\vec{a}=\vec{i}_1(\vec{p}_1\times\vec{a})+\vec{i}_2(\vec{p}_2\times\vec{a})+\vec{i}_3(\vec{p}_3\times\vec{a}).
+\]
+}
+\end{dfn} \pause 
+
+\begin{dfn}
+\parbox{\textwidth}{
+Под \alert{векторным произведением вектора} $\vec{a}$ \alert{на тензор} $ \tensor{\Pi} $ \alert{слева} понимается новый тензор $ \tensor{\Pi''} $, вычисленный по формуле:
+\[ 
+\tensor{\Pi''}=\vec{a}\times\Pi=(\vec{a}\times\vec{i}_1)\vec{p}_1+(\vec{a}\times\vec{i}_2)\vec{p}_2+(\vec{a}\times\vec{i}_3)\vec{p}_3.
+\]
+}
+\end{dfn} \pause 
+}
+
+\frame{
+\frametitle{Векторное произведение диады на вектор}
+
+\[ 
+(\vec{b}\vec{c})\times\vec{a}= \pause 
+(\basis{i}_1b_1\vec{c}+\basis{i}_2b_2\vec{c}+\basis{i}_3b_3\vec{c})\times\vec{a}= \pause 
+\]
+\[
+=
+\basis{i}_1b_1(\vec{c}\times\vec{a})+\basis{i}_2b_2(\vec{c}\times\vec{a})+\basis{i}_3b_3(\vec{c}\times\vec{a})= \pause 
+\vec{b}(\vec{c}\times\vec{a}).
+\] \pause 
+
+\medskip
+\[ 
+\vec{a}\times(\vec{b}\vec{c})= \pause 
+\vec{a}\times(\basis{i}_1b_1\vec{c}+\basis{i}_2b_2\vec{c}+\basis{i}_3b_3\vec{c})= \pause 
+\]
+\[
+=
+(a\times\basis{i}_1) (b_1 \vec{c}) + (a\times\basis{i}_2) (b_2 \vec{c}) + (a\times\basis{i}_3) (b_3 \vec{c})= \pause 
+\]
+\[
+=
+(a\times \basis{i}_1b_1 ) \vec{c} + (a\times\basis{i}_2b_2) \vec{c} + (a\times\basis{i}_3b_3) \vec{c} = \pause 
+\]
+\[
+=
+(a\times \basis{i}_1b_1 + a\times\basis{i}_2b_2 + a\times\basis{i}_3b_3) \vec{c} = \pause 
+(a\times (\basis{i}_1b_1 + \basis{i}_2b_2 + \basis{i}_3b_3)) \vec{c}=
+\] \pause 
+\[
+=
+(\vec{a}\times\vec{b})\vec{c}.
+\]
+}
+
+
+\frame{
+\frametitle{Пример}
+\parbox{\textwidth}{
+ Рассмотрим единичный тензор $\tensor{I}=\basis{i}_1\basis{i}_1+\basis{i}_2\basis{i}_2+\basis{i}_3\basis{i}_3$. \pause 
+Построим  тензор $ \tensor{\Psi} $ 
+\[ 
+\tensor{\Psi}=\vec{\omega}\times \tensor{I}=(\vec{\omega}\times\basis{i}_1)\basis{i}_1+(\vec{\omega}\times\basis{i}_2)\basis{i}_2+(\vec{\omega}\times\basis{i}_3)\basis{i}_3.
+\] \pause 
+Умножим тензор $\tensor{\Psi}$  на произвольный вектор $\vec{a}$ справа
+\[ 
+\tensor{\Psi}\cdot\vec{a}= \pause 
+(\vec{\omega}\times\basis{i}_1)(\basis{i}_1\cdot\vec{a})+(\vec{\omega}\times\basis{i}_2)(\basis{i}_2\cdot\vec{a})+(\vec{\omega}\times\basis{i}_3)(\basis{i}_3\cdot\vec{a})= \pause 
+\]
+\[
+=(\vec{\omega}\times\basis{i}_1)a_1+(\vec{\omega}\times\basis{i}_2)a_2+(\vec{\omega}\times\basis{i}_3)a_3= \pause 
+\]
+\[
+=\vec{\omega}\times\vec{a}.
+\] \pause 
+
+Таким образом, любой антисимметричный тензор может быть представлен в виде
+\[ 
+\tensor{A}=\vec{\omega}\times \tensor{I}.
+\]
+}
+}
+
+\frame{
+\frametitle{Произведение тензоров}
+\parbox{\textwidth}{
+Рассмотрим два тензора $\tensor{A}$ и $\tensor{B}$ и вектор $ \vec{c} $. Тогда пусть
+\[ 
+\vec{c'}=\tensor{B}\cdot\vec{c}.
+\]
+и 
+\[
+\vec{c''}=\tensor{A}\cdot\vec{c'}=\tensor{A}\cdot (\tensor{B}\cdot\vec{c}).
+\]
+} \pause 
+
+\begin{dfn}
+\parbox{\textwidth}{
+Если переход от вектора $ \vec{c} $ к вектору $ \vec{c''} $ осуществляется с помощью одного тензора $ \tensor{\Pi} $ со скалярными элементами $p_{kl}$:
+\[ 
+\vec{c''}=\tensor{\Pi}\cdot\vec{c},
+\]
+то тензор $ \tensor{\Pi} $ называется \alert{скалярным произведением тензоров} $\tensor{A}$ и $ \tensor{B} $:
+\[ 
+\tensor{\Pi}=\tensor{A}\cdot \tensor{B}.
+\]
+}
+\end{dfn}
+}
+
+\frame{
+\frametitle{Покомпонентные формулы для скалярного произведения тензоров}
+}
+
+\frame{
+\frametitle{Определитель тензора}
+\begin{dfn}
+\parbox{\textwidth}{
+\alert{Определителем тензора} $\tensor{\Pi}$ называется определитель матрицы его компонент:
+\[ 
+D(\Pi)=
+\begin{vmatrix}
+p_{11} & p_{21}  & p_{13}  \\
+p_{21} & p_{22}  & p_{23}  \\
+p_{31} & p_{32}   & p_{33}  
+\end{vmatrix}.
+\]
+}
+\end{dfn} \pause 
+
+\begin{exampleblock}{Определитель произведения тензоров}
+\parbox{\textwidth}{
+Т.к. тензоры перемножаются как матрицы, то
+\[
+D(\Pi)=D(A)D(B).
+\]
+}
+\end{exampleblock}
+
+}
+
+\frame{
+\frametitle{Скалярное произведение диад}
+\begin{theorems}
+\normalfont
+\parbox{\textwidth}{
+Пусть $\tensor{A}=\vec{p}\vec{q}$ и $\tensor{B}=\vec{r}\vec{s}$, тогда
+\[ 
+\tensor{\Pi}=(\vec{p}\vec{q})\cdot(\vec{r}\vec{s})=(\vec{q}\cdot\vec{r})\vec{p}\vec{s}.
+\]
+} \pause 
+
+\begin{proof}
+\parbox{\textwidth}{
+Для произвольного вектора $\vec{x}$ рассмотрим
+\[
+\tensor{\Pi}\cdot\vec{x}=  \pause 
+(\vec{p}\vec{q})\cdot((\vec{r}\vec{s})\cdot\vec{x})=(\vec{p}\vec{q})\cdot (\vec{r}(\vec{s}\cdot\vec{x}))= \pause 
+\vec{p}(\vec{q}\cdot\vec{r})(\vec{s}\cdot\vec{x})=
+\] \pause 
+\[
+=((\vec{q}\cdot\vec{r})\vec{p}\vec{s})\cdot\vec{x}.
+\] \pause 
+Таким образом,
+\[
+\tensor{\Pi}=(\vec{q}\cdot\vec{r})\vec{p}\vec{s}.
+\]
+}
+\end{proof}
+
+\end{theorems}
+
+}
+
+\end{document}
+
