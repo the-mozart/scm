@@ -1,0 +1,318 @@
+\documentclass{beamer}
+
+\usepackage{beamerthemesplit}
+\usetheme{Singapore} %Copenhagen}
+%\usecolortheme{whale}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+
+\usepackage{textcomp}
+\usepackage{amssymb,amsmath}
+%\usepackage{animate}
+%\usepackage{longtable}
+\usepackage{xcolor}
+\usepackage{enumitem}
+
+\newcounter{N}
+
+%% Форматирование окружения itemize
+%\usepackage{ragged2e}
+%\let\olditem\item
+%\renewcommand\item{\olditem\justifying}
+
+
+\title[]{Сведения из теории матриц}
+
+\author[]{ {\em Верещагин Антон Сергеевич}
+	\\
+	канд. физ.-мат. наук, доцент\\
+	\bigskip
+	Кафедра аэрогидродинамики ФЛА НГТУ
+}
+
+\newtheorem{dfn}{Определение}  
+\newtheorem{theorems}{Теорема}  
+\newtheorem{property}{Свойство}  
+
+
+\newcommand{\Rn}{\mathrm{R}^n}
+\newcommand{\Sm}{\mathrm{S}^m}
+\newcommand{\Ql}{\mathrm{Q}^l}
+
+\newcommand{\Rd}[1]{\mathbb{R}^{#1}}
+\newcommand{\Vn}{\mathrm{V}^n}
+
+
+\newcommand{\oper}[1]{\mathcal{#1}}
+
+\begin{document}
+
+\frame{\titlepage}
+
+
+\frame{
+\frametitle{Аннотация}
+\parbox{\textwidth}{
+Сведения из теории матриц. Теоремы о разрешимости систем линейных уравнений. 
+}
+}
+
+\frame{
+\frametitle{Прямоугольные матрицы}
+
+\begin{dfn}
+\parbox{\textwidth}{
+Прямоугольную  таблицу размера  $m \times n$ ($m$ строк, $n$ столбцов) из действительных чисел будем называть прямоугольной матрицей и обозначать:
+\[
+A=
+\begin{pmatrix} 
+a_{11} & a_{12} & \ldots & a_{1n} \\
+a_{21} & a_{22} & \ldots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m1} & a_{m2} & \ldots & a_{mn}
+\end{pmatrix}=
+(a_{ik})_{1\leq i \leq m, 1\leq k \leq n}.
+\]
+}
+\end{dfn}
+
+}
+
+
+
+\frame{
+\frametitle{Определитель матрицы}
+\begin{dfn}
+Если $m=n$, тогда матрица $A$ называется квадратной.
+\end{dfn}
+
+\begin{dfn}
+\parbox{\textwidth}{
+Определителем квадратной матрицы $A=(a_{ik})_{1\leq i,k \leq n}$ называется следующая функция от элементов матрицы:
+\[
+|A| = \operatorname{det} A = \sum_{\alpha_1,\alpha_2,\ldots,\alpha_n}(-1)^{N(\alpha_1,\alpha_2,\ldots,\alpha_n)}
+a_{1,\alpha_1}a_{2,\alpha_2}\ldots a_{n,\alpha_n},
+\]
+где  $\alpha _{1},\alpha _{2},\ldots ,\alpha _{n}$ -- перестановка чисел от $1$ до $n$, $N(\alpha _{1},\alpha _{2},\ldots ,\alpha _{n})$ -- число инверсий в перестановке, суммирование проводится по всем перестановкам порядка  $n$.
+}
+\end{dfn}
+}
+
+\frame{
+\frametitle{Разложение по строке или столбцу}
+В общем случае, определитель можно вычислить, применив следующую рекурсивную формулу:
+\[
+|A| =\sum _{j=1}^{n}(-1)^{1+j}a_{1j}{\bar {M}}_{j}^{1},
+\]
+где ${\bar {M}}_{j}^{1}$ -- дополнительный минор к элементу $a_{1j}$. Эта формула называется разложением по 1-ой строке.
+
+\begin{dfn}
+\parbox{\textwidth}{
+Если $|A|=0$, то матрица называется {\em особенной}, иначе -- {\em неособенной}.
+}
+\end{dfn}
+
+}
+
+\frame{
+\frametitle{Свойства определителя}
+
+
+\begin{property}
+\begin{itemize}[partopsep=1pt,label=\textbullet]
+\item Определитель матрицы не меняется при транспонировании матрицы.
+\item Если две строки (столбца) матрицы совпадают, то её определитель равен нулю. 
+\item При добавлении к любой строке (столбцу) линейной комбинации других строк (столбцов) определитель не изменится. 
+\item Если хотя бы одна строка (столбец) матрицы нулевая, то определитель равен нулю.
+\item Если переставить две строки (столбца) матрицы, то её определитель умножается на (-1).
+\end{itemize}
+
+
+
+\end{property}
+
+
+
+}
+
+\frame{
+\frametitle{Минор матрицы}
+
+\begin{dfn}
+\parbox{\textwidth}{
+Из элементов прямоугольной матрицы  $A$ размера $m\times n$ можно составить квадратную матрицу размера $p\times p$, выбрав из неё строки с номерами $i_1, i_2,\ldots,i_p$ и столбцы с номерами $k_1, k_2,\ldots, k_p$. Определитель полученной матрицы называется {\em минором $p$-ого порядка}:
+\[
+A
+\begin{pmatrix}
+i_1 & i_2 & \ldots & i_p \\
+k_1 & k_2 & \ldots & k_p \\
+\end{pmatrix}=
+\begin{vmatrix}
+a_{i_1k_1} & a_{i_1k_2} & \ldots & a_{i_1k_p} \\
+a_{i_2k_1} & a_{i_2k_2} & \ldots & a_{i_2k_p} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{i_pk_1} & a_{i_pk_2} & \ldots & a_{i_pk_p}
+\end{vmatrix}.
+\]
+}
+\end{dfn}
+
+\begin{dfn}
+\parbox{\textwidth}{
+Если $i_1=k_1$, $i_2=k_2$, \ldots, $i_p=k_p$, то минор называется главным.
+}
+\end{dfn}
+}
+
+
+\frame{
+\frametitle{Ранг матрицы}
+\begin{dfn}
+\parbox{\textwidth}{
+Наибольший из порядков  отличных от нуля миноров называется рангом матрицы $A$ и обозначается $r_A$.
+}
+\end{dfn}
+\begin{property}
+\parbox{\textwidth}{
+\begin{itemize}[partopsep=1pt,label=\textbullet]
+\item Ранг прямоугольной $m \times n$ матрицы $A$ меньше либо равен $\min(m,n)$: $r_A \leq \min(m,n)$.
+\item Если у квадратной $n\times n$ матрицы $A$ определитель равен $0$, тогда $r_A < n$, в противном случае $r_A = n$.
+\end{itemize}
+
+}
+\end{property}
+
+}
+
+\frame{
+\frametitle{ Произведение матриц }
+\begin{dfn}
+\parbox{\textwidth}{
+Произведением $m \times s$ матрицы  $A$ на $s \times n$ матрицу $B$ называется $m\times n$ матрица $C$, элементы которой определяются по формулам:
+\[
+c_{ij}=\sum_{k=1}^s a_{ik}b_{kj},\quad
+(1 \leq i \leq m, 1\leq j \leq n).
+\]
+}
+\end{dfn}
+}
+
+\frame{
+\frametitle{ Теоремы о ранге }
+\begin{theorems}
+\parbox{\textwidth}{
+ Ранг произведения двух матриц не превосходит ранги сомножителей, т.е. если $C=AB$, то $r_C\leq \min(r_A,r_B)$.
+}
+\end{theorems}
+
+\begin{theorems}
+\parbox{\textwidth}{
+ При умножении прямоугольной матрицы слева или справа на неособенную матрицу ранг исходной матрицы не изменяется.
+}
+\end{theorems}
+}
+
+\frame{
+\frametitle{ Обратная матрица }
+\begin{dfn}
+\parbox{\textwidth}{
+Единичной  матрицей $E$ называют диагональную $n\times n$ матрицу с единицами на главной диагонали:
+\[
+E = 
+\begin{pmatrix} 
+1 & 0 & \ldots & 0 \\
+0 & 1 & \ldots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \ldots &1
+\end{pmatrix}
+\]
+}
+\end{dfn}
+\begin{dfn}
+\parbox{\textwidth}{
+Если для квадратной $n\times n$ матрицы $A$ существует матрица $B$ такая, что 
+\[
+A B = BA = E,
+\]
+тогда $B$ называют матрицей обратной к $A$ и обозначают $A^{-1}$.
+}
+\end{dfn}
+}
+
+\frame{
+\frametitle{ Некоторые свойства операций над матрицами }
+\begin{property}
+\parbox{\textwidth}{
+\begin{itemize}[partopsep=1pt,label=\textbullet]
+\item В общем случае, вообще говоря, $AB \neq BA$.
+\item Для любой квадратной матрицы $A$ и соответствующего размера единичной $E$: $AE$=$EA$ =$A$.
+\item $|AB|=|A||B|$.
+\item $|A^{-1}|=|A|^{-1}$.
+\item Для квадратной матрицы $A$ существует обратная матрица $A^{-1}$ тогда и только тогда, когда $|A|\neq 0$.
+\end{itemize}
+}
+\end{property}
+}
+
+\frame{
+\frametitle{ Cистемы линейных уравнений }
+\parbox{\textwidth}{
+Систему из $m$ линейных уравнений c $n$ переменными 
+\begin{eqnarray*}
+a_{11}x_1 + a_{12} x_2+ \ldots + a_{1n} x_n & = & b_1, \\
+a_{21}x_1 + a_{22} x_2+ \ldots + a_{2n} x_n & = & b_1, \\
+\ldots\ldots\ldots & \ldots & \ldots \\
+a_{m1}x_1 + a_{m2} x_2+ \ldots + a_{mn} x_n & = & b_m \\
+\end{eqnarray*}
+можно переписать используя $m\times n$ матрицу $A=(a_{ij})_{1\leq i \leq m, 1\leq j \leq n}$, $n$ вектор столбец $x=(x_j)_{1\leq j \leq n}$, $m$ вектор столбец $b = (b_i)_{1\leq i \leq m}$ в кратком матричном виде
+\[
+Ax=b.
+\]
+}
+}
+
+\frame{
+\frametitle{ Теоремы о единственности решения однородной системы линейных уравнений }
+\parbox{\textwidth}{
+\begin{theorems}
+\parbox{\textwidth}{
+Пусть $A$ квадратная $n\times n$ матрица, $x$ столбец размера $n$. Уравнение $Ax=0$ имеет ненулевое решение тогда и только тогда, когда матрица $A$ особенная ($|A|=0$), иначе говоря, когда ранг матрицы $A$ меньше числа неизвестных $(r_A<n)$. В противном случае неособенной матрицы $(|A|\neq 0)$, иначе говоря, $r_A=n$) оно имеет только нулевое решение.
+}
+\end{theorems}
+
+\begin{theorems}
+\parbox{\textwidth}{
+ Пусть $A$ прямоугольная $m\times n$ матрица, $x$ столбец размера $n$. Система линейных уравнений $Ax=0$ имеет ненулевое решение тогда и только тогда, когда ранг матрицы $A$ меньше числа неизвестных ($r_A < n$). В противном случае $(r_A=n)$ она имеет только нулевое решение.
+}
+\end{theorems}
+}
+}
+
+
+\frame{
+	\frametitle{ Теорема о разрешимости системы линейных уравнений }
+	
+	\begin{exampleblock}{Теорема Кронекера-Капелли}
+		\parbox{\textwidth}{
+		Система линейных уравнений $Ax=b$ разрешима тогда и только тогда, когда ранг матрицы $A$ равен рангу матрицы $A|b$, где $A|b$~-- расширенная матрица, полученная из матрицы $A$ приписыванием столбца $b$.	
+		}
+	\end{exampleblock}
+}
+
+\frame{
+	\frametitle{Литература}
+	
+	\begin{itemize}[partopsep=1pt,label=\textbullet]
+		\item 
+		{\em Курош~А.~Г.} Курс высшей алгебры. Учебник. 17-е изд., стер. -- СПб.: Издательство <<Лань>>, 2008.
+		
+		\item {\em Ветлуцкий~В.~Н.} Специальные разделы высшей математики: учеб. пособие. -- Новосибирск: Изд-во НГТУ, 2005.
+	\end{itemize}
+	
+}
+
+
+\end{document}
