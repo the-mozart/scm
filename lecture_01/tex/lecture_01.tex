@@ -1,0 +1,681 @@
+\documentclass{beamer}
+
+\usepackage{beamerthemesplit}
+\usetheme{Singapore} %Copenhagen}
+%\usecolortheme{whale}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+
+\usepackage{textcomp}
+\usepackage{amssymb,amsmath}
+%\usepackage{animate}
+%\usepackage{longtable}
+\usepackage{xcolor}
+
+\newcounter{N}
+
+%% Форматирование окружения itemize
+%\usepackage{ragged2e}
+%\let\olditem\item
+%\renewcommand\item{\olditem\justifying}
+
+
+\title[]{Сведения из теории матриц. Линейные преобразования векторных пространств и их свойства.
+}
+
+\author[]{ {\em Верещагин Антон Сергеевич}
+	\\
+	канд. физ.-мат. наук, доцент\\
+	\bigskip
+	Кафедра аэрогидродинамики ФЛА НГТУ
+}
+
+%
+%\date[]{Новосибирск -- 2016}
+
+\newtheorem{dfn}{Определение}  
+\newtheorem{theorems}{Теорема}  
+
+\newcommand{\Rn}{\mathrm{R}^n}
+\newcommand{\Sm}{\mathrm{S}^m}
+\newcommand{\Ql}{\mathrm{Q}^l}
+
+\newcommand{\Rd}[1]{\mathbb{R}^{#1}}
+\newcommand{\Vn}{\mathrm{V}^n}
+
+
+\newcommand{\oper}[1]{\mathcal{#1}}
+
+\begin{document}
+\frame{\titlepage}
+
+
+\frame{
+\frametitle{Аннотация}
+\parbox{\textwidth}{
+Векторное пространство. Отображение n-мерного вектора в m-мерный. Линейные операторы. Матрица, соответствующая линейному оператору. Сложение и умножение линейных операторов. Преобразования координат. Эквивалентные матрицы.
+}
+}
+
+
+\frame{
+\frametitle{ Определение группы }
+\begin{dfn}
+\rm
+\parbox{\textwidth}{
+{\bf Группой} называется упорядоченная двойка $\{X,\cdot\}$, где $X$ -- множество элементов, а $\cdot:X^2 \to X$ -- операция между элементами множества $X$, обладающая следующими свойствами:
+\begin{enumerate}
+\item  $(a\cdot b) \cdot c = a\cdot (b \cdot c)$ ($\forall a,b,c \in X$)
+\item $\exists 0\in X$: $0+x=x+0=x$ ($\forall x\in X$)
+\item $\forall x\in X$ $\exists (-x)\in X$: $x\cdot(-x)=(-x)\cdot x = 0$
+\end{enumerate}
+
+\medskip
+Если выполнено дополнительно следующее свойство, то группа называется {\bf абелевой}:
+\begin{enumerate}
+\item[4.] $x\cdot y=y\cdot x$ ($\forall x,y \in X$)
+\end{enumerate}
+}
+\end{dfn}
+}
+
+\frame{
+\frametitle{Векторное пространство}
+
+\begin{dfn}
+\rm
+\parbox{\textwidth}{
+{\bf  Векторным пространством} называется упорядоченная тройка $\{V,R,\cdot\}$, где $V$ -- абелева группа  по сложению с элементами, которые будем обозначать $\vec{x}$ и называть векторами. $R$ -- поле скаляров. $\cdot:R\times V \to V$ -- однозначно определенная операция умножения скаляра на вектор. При этом должны выполнятся следующие условия:
+}
+
+\begin{enumerate}
+% \pause
+%  \item $\vec{x}+\vec{y}=\vec{y}+\vec{x}$
+% \pause
+% \item $(\vec{x}+\vec{y})+\vec{z}=\vec{x}+(\vec{y}+\vec{z})$
+% \pause
+% \item $\exists\vec{0}\in V$ такой, что $\vec{0}+\vec{x}=\vec{x}$
+ \pause
+ \item $1\cdot\vec{x}=\vec{x}$\quad $\forall x\in V$
+ \pause
+ \item $\alpha\cdot(\beta\cdot\vec{x})=(\alpha\beta)\cdot\vec{x}$
+ \pause
+ \item ($\alpha+\beta)\cdot\vec{x}=\alpha\cdot\vec{x}+\beta\cdot\vec{x}$
+ \pause
+ \item $\alpha\cdot(\vec{x}+\vec{y})=\alpha\cdot\vec{x}+\alpha\cdot\vec{y}$
+\end{enumerate}
+
+\end{dfn}
+
+
+}
+
+%\frame{
+%\frametitle{Примеры векторных пространств}
+%
+%
+%}
+
+
+\frame{
+\frametitle{Линейная зависимость и линейная независимость векторов}
+\only<1>{
+\begin{dfn}
+\rm 
+Линейной комбинацией векторов $\vec{x}_1$,\ldots,$\vec{x}_n$ c коэффициетами $\alpha_1$, \ldots, $\alpha_n$ называется следующая сумма
+\begin{equation*}
+\alpha_{1}\vec{x}_1+\alpha_2\vec{x}_2+\ldots+\alpha_n\vec{x}_n
+\end{equation*}
+\end{dfn}
+}
+
+
+\begin{dfn}<2->
+\rm 
+Векторы $\vec{x}$, $\vec{y}$, $\vec{z}$, \ldots называются {\bf линейно зависимыми}, ecли существуют такие скаляры $\alpha$, $\beta$, $\gamma$, \ldots, причем один из них отличен от $0$, такие что
+\[
+\alpha \vec{x} + \beta \vec{y} + \gamma \vec{z} + \ldots = \vec{0}.
+\]
+\end{dfn}
+
+\begin{dfn}<3->
+\rm 
+Векторы $\vec{x}$, $\vec{y}$, $\vec{z}$, \ldots называются {\bf линейно независимыми}, если из равенства
+\[
+\alpha \vec{x} + \beta \vec{y} + \gamma \vec{z} + \ldots = \vec{0}
+\]
+следует, что все $\alpha=\beta=\gamma=\ldots=0$.
+\end{dfn}
+
+}
+
+%\frame{
+%\frametitle{Пример линейно зависимых векторов}
+%
+%}
+%
+%\frame{
+%\frametitle{Пример линейно независимых векторов}
+%
+%}
+
+
+\frame{
+\frametitle{Размерность и базис векторного пространства}
+\begin{dfn}<1->
+\rm
+\parbox{\textwidth}{
+Векторное пространство $\mathrm{V}$ называется {\bf $\mathbf{n}$-мерным}, если в нем существуют $n$ линейно независимых векторов, а любые \mbox{$n+1$} будут линейно зависимы. $n$-мерное векторное пространство обозначается $\Vn$.
+}
+\end{dfn}
+
+\bigskip
+\begin{dfn}<2->
+\rm
+\parbox{\textwidth}{
+{\bf Базисом} $n$-мерного пространства $\Vn$ называется система любых $n$ линейно независимых векторов $\vec{e}_1$, $\vec{e}_2$, \ldots,$\vec{e}_n$.
+}
+\end{dfn}
+
+}
+
+\frame{
+\frametitle{Пример конечномерного пространства}
+
+\begin{exampleblock}{Пространство $\Rd{3}$}
+Рассмотрим четыре вектора в пространстве $\Rd{3}$
+\begin{equation*}
+\begin{array}{lcl}
+\vec{x_i} & = & \{x_i^1,x_i^2,x_i^3\}\\
+\end{array} (i=1,\ldots,4)
+\end{equation*}
+
+
+\parbox{\textwidth}{
+Ранг матрицы, составленный из координат этих векторов не может превышать $3$, значит любые $4$ вектора в $\Rd{3}$ будут всегда линейно зависимы.
+}
+\end{exampleblock}
+
+\begin{exampleblock}{Базис в $\Rd{3}$}
+Базисом в $\Rd{3}$ будут три любые линейно независимых вектора, например,
+\begin{equation*}
+\begin{array}{lcl}
+\vec{e_1} & = & \{1,0,0\},\\
+\vec{e_2} & = & \{0,1,0\},\\
+\vec{e_3} & = & \{0,0,1\}.\\
+\end{array}
+\end{equation*}
+
+
+\end{exampleblock}
+
+}
+
+\frame{
+\frametitle{Разложение вектора по базису пространства}
+
+
+\begin{theorems}
+\rm
+\parbox{\textwidth}{
+В вектороном $n$-мерном пространстве $\Vn$ каждый вектор может быть единственным способом представлен в виде линейной комбинации векторов базиса.
+}
+\end{theorems}
+
+}
+
+\frame{
+\frametitle{Разложение вектора по базису пространства}
+
+\begin{proof}
+\parbox{\textwidth}{
+\begin{itemize}
+
+\item Рассмотрим базис векторного пространства $\Vn$ $\vec{e}_1$, \ldots, $\vec{e}_n$ и произвольный вектор $\vec{x}\in \Vn$.
+
+\item<2-4> Система векторов $\vec{x}$, $\vec{e}_1$, \ldots, $\vec{e}_n$ состоит из $n+1$ вектора, поэтому является линейно зависимой. 
+
+\item<3-4>
+Следовательно существуют коэффициенты $\alpha_1$,\ldots,$\alpha_n$, $\beta$, причем один из $\alpha_i \neq 0$ (пусть $i=1$) и $\beta\neq 0$, такие что
+\begin{equation*}
+\alpha_1\vec{e}_1+\alpha_2\vec{e}_2+\ldots+\alpha_n\vec{e}_n + \beta \vec{x} = 0.
+\end{equation*}
+
+\item<4>
+Следовательно 
+\begin{equation*}
+\vec{x}=-\frac{\alpha_1}{\beta}\vec{e_1}-\frac{\alpha_2}{\beta}\vec{e_2}-\ldots-\frac{\alpha_n}{\beta}\vec{e_n}.
+\end{equation*}
+
+
+
+
+\end{itemize}
+}
+
+\end{proof}
+
+}
+
+
+\frame{
+\frametitle{Единственность разложения по базису}
+
+\begin{proof}
+\parbox{\textwidth}{
+\begin{itemize}
+
+\item<1->
+Пусть вектор 
+\[
+\vec{x}=\alpha_1\vec{e}_1+\alpha_2\vec{e}_2+\ldots+\alpha_n\vec{e}_n=\beta_1\vec{e}_1+\beta_2\vec{e}_2+\ldots+\beta_n\vec{e}_n,
+\]
+где $\alpha_i\neq\beta_i$ для некоторого $i$.
+
+\item<2-> %Выражение
+$
+(\alpha_1-\beta_1)\vec{e}_1+(\alpha_2-\beta_2)\vec{e}_2+\ldots+(\alpha_n-\beta_n)\vec{e}_n=0,
+$
+где $\alpha_i-\beta_i\neq 0$.
+
+\item<3->
+Это невозможно в силу линейной независимости базиса $\vec{e}_i$ $(i=1,\ldots,n)$.
+\end{itemize}
+}
+\end{proof}
+\onslide<4>{
+\begin{dfn}
+\parbox{\textwidth}{
+\rm
+Коэффициенты в разложении вектора $\vec{x}$ по базису $\vec{e}_i$ называются координатами вектора $\vec{x}$ в базисе $\vec{e}_i$ $(i=1,\ldots,n)$.
+}
+\end{dfn}
+}
+
+}
+
+\frame{
+\frametitle{Теорема о линейной независимости векторов}
+
+\begin{theorems}[о линейной независимости векторов]
+\rm
+\parbox{\textwidth}{
+Для того, чтобы векторы $\vec{x}_1$, $\vec{x}_2$, \ldots, $\vec{x}_m$ в пространстве $R^n$ были линейно независимы, необходимо и достаточно, чтобы ранг матрицы, составленной из координат этих векторов в произвольном базисе, был равен числу этих векторов. В противном случае они линейно зависимы.
+}
+\end{theorems}
+}
+
+
+\frame{
+\frametitle{Линейный оператор}
+\begin{dfn}
+\rm
+Отображение одного конечномерного пространства в другое  $\oper{A}:\Rn\rightarrow \Sm$ называется линейным, если 
+\[
+ \oper{A}(\vec{x}+\vec{y})=\oper{A}\vec{x}+\oper{A}\vec{y},\quad \oper{A}(\alpha\vec{x})=\alpha\oper{A}\vec{x}.
+\]
+\end{dfn}
+ 
+}
+
+
+\frame{
+\frametitle{Матрица линейного оператора}
+\begin{theorems}
+\rm
+\parbox{\textwidth}{
+\onslide<1->{
+Пусть $\oper{A}$ -- линейное преобразования $n$-мерного векторного пространства $\Rn$ в $m$-мерное векторное пространство $\Sm$ 
+\[
+\oper{A}:\Rn\rightarrow \Sm.
+\]
+}
+\onslide<2->{
+Пусть $\vec{e}_i$ $(i=1,\ldots,n)$ -- базис $\Rn$, а $\vec{g}_k$ $(k=1,\ldots,m)$ -- базис $\Sm$.\\
+}
+\onslide<3->{
+Пусть для произвольного вектора $\vec{x}\in\Rn$ $\vec{y}=\oper{A}\vec{x} \in \Sm$. \\
+}
+\onslide<4->{
+Тогда существует матрица $A$ размера $m\times n$ такая, что
+\[
+y=Ax,
+\]
+где $y$ -- вектор столбец, составленный из координат вектора $\vec{y}$ в базисе $\vec{g}_k$, $x$ -- вектор столбец, составленный из координат вектора $\vec{x}$ в базисе $\vec{e}_i$.
+}
+}
+\end{theorems}
+ 
+}
+
+\frame{
+\frametitle{Доказательство теоремы представлении линейного оператора}
+
+\begin{proof}
+\begin{itemize}
+\item[] Пусть $\vec{y}=\oper{A}\vec{x}\in\Sm$ для некоторого $\vec{x}\in \Rn$. 
+\pause
+\item[] Тогда $\vec{y}=\sum\limits_{k=1}^m y_k\vec{g}_k$, $\vec{x}=\sum\limits_{i=1}^n x_i\vec{e}_i$.
+\pause
+\item[] В силу линейности оператора $\oper{A}$:
+\[
+\vec{y}=\oper{A}\vec{x}=\oper{A}\left(\sum\limits_{i=1}^n x_i\vec{e}_i\right)=\sum\limits_{i=1}^n x_i (\oper{A}\vec{e}_i).
+\]
+\pause
+\item[] Т.к. $\oper{A}\vec{e}_i\in \Sm$, тогда существуют такие числа $\alpha_{ij}$%($1\leq i \leq n$, $1\leq j\leq m$)
+, что
+\[
+\oper{A}\vec{e}_i=\sum\limits_{j=1}^m \alpha_{ij}\vec{g}_j\quad
+(i=1,\ldots,n).
+\]
+\end{itemize}
+
+
+\end{proof}
+
+}
+
+\frame{
+\frametitle{Доказательство теоремы представлении линейного оператора}
+
+\begin{proof}
+\begin{itemize}
+\item[] Тогда
+\[
+\vec{y}=\sum\limits_{i=1}^n x_i (\oper{A}\vec{e}_i)=\sum\limits_{i=1}^n x_i \left( \sum\limits_{j=1}^m \alpha_{ij}\vec{g}_j\right)=
+\sum\limits_{j=1}^m \left(\sum\limits_{i=1}^n x_i \alpha_{ij}\right) \vec{g}_j.
+\]
+\pause
+\item[] Из единственности представления вектора $\vec{y}$ по базису $\vec{g}_k$ ($k=1,\ldots,m$) следует, что
+\[
+y_j=\sum\limits_{i=1}^n x_i \alpha_{ij}.
+\]
+
+
+\end{itemize}
+
+
+\end{proof}
+
+}
+
+
+\frame{
+\frametitle{Иллюстрация теоремы о представлении линейного оператора}
+
+\begin{itemize}
+\item[] Пусть $x$ -- вектор столбец, составленный из координат, вектора $\vec{x}$ в базисе $\vec{e}_i$ $x_i$.
+\pause
+\item[] Пусть $y$ -- вектор столбец, составленный из координат, вектора $\vec{y}$ в базисе $\vec{g}_k$ $y_k$.
+\pause
+\item[] Пусть $A=(a_{ij})$ -- $m\times n$ матрица, составленная из координат образов векторов $\oper{A}\vec{e}_i$ по столбцам ($a_{ij}=\alpha_{ji}$)
+\[
+A = \left(
+\begin{array}{c|c|c|c}
+\oper{A}\vec{e}_1 & \oper{A}\vec{e}_2 & \ldots & \oper{A}\vec{e}_n\\
+\end{array}\right)=
+\left(
+\begin{array}{cccc}
+\alpha_{11} & \alpha_{21} & \ldots & \alpha_{n1} \\
+\alpha_{12} & \alpha_{22} & \ldots & \alpha_{n2} \\
+\vdots & \vdots & \ddots & \vdots\\
+\alpha_{1m} & \alpha_{2m} & \ldots & \alpha_{nm} \\
+\end{array}\right)
+\]
+\end{itemize}
+
+}
+
+\frame{
+\frametitle{Иллюстрация теоремы о представлении линейного оператора}
+
+\begin{itemize}
+\item[] Тогда 
+\[
+\left( 
+\begin{array}{c}
+y_1 \\
+y_2\\
+\vdots\\
+y_m
+\end{array}\right)=
+\left(
+\begin{array}{cccc}
+a_{11} & a_{12} & \ldots & a_{1n} \\
+a_{12} & a_{22} & \ldots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots\\
+a_{m1} & a_{m2} & \ldots & a_{mn} \\
+\end{array}\right)
+\left( 
+\begin{array}{c}
+x_1 \\
+x_2\\
+\vdots\\
+x_n
+\end{array}\right).
+\]
+\end{itemize}
+
+}
+
+\frame{
+\frametitle{Сложение операторов}
+
+\begin{dfn}
+\rm 
+\begin{itemize}
+\item[]
+Пусть $\oper{A}$, $\oper{B}$ -- линейные операторы, действующие из пространства $\Rn$ в $\Sm$.
+\pause 
+\item[]
+Оператор $\oper{C}:\Rn\rightarrow\Sm$ называется суммой $\oper{A}$ и $\oper{B}$ и обозначается
+\[
+\oper{C}=\oper{A}+\oper{B}, 
+\]
+\pause
+\item[]
+тогда и только тогда, когда 
+\[
+\forall \vec{x}\in R^n\quad \oper{C}\vec{x}=\oper{A}\vec{x} +\oper{B}\vec{x}.
+\]
+\end{itemize}
+\end{dfn}
+
+
+}
+
+
+\frame{
+\frametitle{Произведение операторов}
+
+\begin{dfn}
+\rm 
+\begin{itemize}
+\item[]
+Пусть $\oper{A}:\Rn\rightarrow\Sm$, $\oper{B}:\Ql\rightarrow\Rn$ -- линейные операторы.
+\pause 
+\item[]
+Оператор $\oper{C}:\Ql\rightarrow\Sm$ называется произведением $\oper{A}$ и $\oper{B}$ и обозначается
+\[
+\oper{C}=\oper{A}\oper{B}, 
+\]
+\pause
+\item[]
+тогда и только тогда, когда 
+\[
+\forall \vec{x}\in \Ql \quad \oper{C}\vec{x}=\oper{A}(\oper{B}\vec{x}).
+\]
+\end{itemize}
+\end{dfn}
+
+
+}
+
+
+\frame{
+\frametitle{Связь между координатами векторов в различных базисах}
+\begin{itemize}
+\item[]
+Пусть $\vec{e}_i$, $\vec{g}_j$ ($i,j=1,\ldots,n$) два различных базиса векторного пространства $\Rn$.
+\pause
+\item[] 
+Существуют числа $t_{ij}$  и матрица $T=(t_{ij})$ ($i,j=1,\ldots,n$) ($|T|\neq 0$), такая что
+\pause
+\item[]
+\[
+\vec{e}_i=\sum\limits_{j=1}^n t_{ij} \vec{g}_j\quad
+(i=1,\ldots,n).
+\]
+\pause
+\item[]
+Пусть $\vec{x} = \sum\limits_{i=1}^n x_i \vec{e}_i=\sum\limits_{i=1}^n x'_i \vec{g}_i$ -- два различных представления одного вектора в различных базисах.
+\end{itemize}
+
+}
+
+\frame{
+\frametitle{Связь между координатами векторов в различных базисах}
+\begin{itemize}
+\item[] Рассмотрим 
+\[
+\vec{x}=\sum\limits_{i=1}^n x_i \vec{e}_i = \sum\limits_{i=1}^n x_i \left( \sum\limits_{j=1}^n t_{ij} \vec{g}_j \right) = \sum\limits_{j=1}^n \left( \sum\limits_{i=1}^n x_i t_{ij} \right)\vec{g}_j.
+\]
+\pause
+\item[]
+Из единственности разложения $\vec{x}$ по базису $\vec{g}_j$ следует, что
+\[
+x'_j= \sum\limits_{i=1}^n x_i t_{ij},
+\]
+\pause
+\item[]
+что в матричном виде запишется
+\[
+x'=T^{\rm t}x,
+\]
+где $x'$, $x$ -- вектор столбцы координат вектора $\vec{x}$ в соответствующих базисах.
+
+\end{itemize}
+
+}
+
+\frame{
+\frametitle{Эквивалентные матрицы}
+
+\begin{dfn}
+\rm
+Матрицы $A$, $B$ размера $m\times n$ называются {\bf эквивалентными}, если существуют матрица $P$ размера $m\times m$ ($|P|\neq 0$) и матрица $Q$ ($|Q|\neq 0$) размера $n\times n$ такие, что
+\[
+A = P B Q.
+\]
+\end{dfn}
+
+}
+
+\frame{
+\frametitle{Связь между матричным представлением линейного оператора в различных базисах}
+
+\begin{theorems}
+\rm
+Матрицы, соответвующие линейному оператору $\oper{A}:\Rn\rightarrow\Sm$, в различных базисах пространств $\Rn$ и $\Sm$ эквивалентны.
+\end{theorems}
+
+}
+
+\frame{
+\begin{proof}
+
+\begin{itemize}
+
+\item[]
+Пусть $\vec{e}_1,\ldots,\vec{e}_n$ и $\vec{e}'_1,\ldots,\vec{e}'_n$ базис пространства $\Rn$, а векторы $\vec{g}_1,\ldots,\vec{g}_m$ и $\vec{g}'_1,\ldots,\vec{g}'_m$ базисы пространства $\Sm$.
+\pause
+\item[]
+Пусть $\oper{A}$ -- линейной преобразование $\Rn$ в $\Sm$. 
+
+\pause
+\item[]
+Пусть $A$ -- матрица преобразования, соответствующая оператору  $\oper{A}$  в базисах $e$ и $g$, а $A'$ -- в базисах $e'$ и $g'$.
+
+\pause
+\item[]
+Пусть для некоторых $\vec{x}$ из $\Rn$ и $\vec{y}$ из $\Sm$ 
+\[
+	\vec{y}=\oper{A}\vec{x}.
+\]
+
+\pause
+\item[]
+Тогда в матричной записи в соответствующих базисах $y=Ax$ и $y'=A'x'$
+
+\pause
+\item[]
+Пусть $Q$ -- $n\times n$-матрица перехода между координатами векторов в установленных базисах $x=Qx'$ в $\Rn$, 
+
+\pause
+\item[] а $N$ -- $m\times m$-матрица перехода между координатами вектора в $\Sm$ $y=Ny'$.
+
+
+\end{itemize}
+
+\end{proof}
+}
+
+\frame{
+\begin{proof}
+
+\begin{itemize}
+
+\item[] 
+С одной стороны
+\[
+y=Ax=AQx'
+\]
+
+\pause
+\item[]
+С другой стороны
+\[
+y=Ny'=NA'x'.
+\]
+
+\pause
+\item[] Таким образом,
+\[
+\forall x'\quad
+NA'x'=AQx'.
+\]
+
+\pause
+\item[]
+Следовательно 
+\[
+A'=N^{-1}AQ.
+\]
+\end{itemize}
+
+\end{proof}
+}
+
+\frame{
+\frametitle{Теорема об эквивалентности матриц}
+\begin{theorems}[об эквивалентности матриц]
+\rm
+\parbox{\textwidth}{
+Для того чтобы две прямоугольные матрицы $A$ и $B$ одинаковых размеров $m\times n$ были эквивалентны, необходимо и достаточно, чтобы их ранги совпадали $r_A=r_B$.
+}
+\end{theorems}
+}
+
+\end{document}
+%\begin{columns}
+%\begin{column}{0.5\textwidth}
+%\end{column}
+%
+%\begin{column}{0.5\textwidth}
+%\end{column}
+%
+%
+%\end{columns}
