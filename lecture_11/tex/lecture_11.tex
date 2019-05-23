@@ -1,0 +1,227 @@
+\documentclass{beamer}
+
+\usepackage{beamerthemesplit}
+\usetheme{Singapore} %Copenhagen}
+%\usecolortheme{whale}
+
+\input{../../include/preamble.inc} 
+\input{../../include/definitions.inc} 
+\input{../../include/author.inc} 
+
+
+\title[]{Основные свойства аффинных ортогональных тензоров}
+
+\begin{document}
+
+\frame{\titlepage}
+
+
+\frame{
+\frametitle{Аннотация}
+\parbox{\textwidth}{
+Классификация тензоров. Теорема о полном тензоре. Теорема о существовании обратного тензора. Главные значения тензора. Инварианты тензора. Бискалярное произведение. Тензорное поле. Дивергенция тензора.
+}
+}
+
+\frame{
+	\frametitle{ Классификация тензоров }
+	
+	\begin{exampleblock}{}
+		\parbox{\textwidth}{
+			Пусть для  выбранного тензора $\tensor{A}$ и произвольного вектора $\vec{r}$
+			\[
+			\vec{r'} = \tensor{A}\cdot\vec{r},
+			\]
+			тогда возможны следующие варианты:
+			\begin{itemize} 
+				\item<1-> все $\vec{r'}$ равны $0$, тогда $\tensor{A}$ -- \alert{нулевой};
+				\item<2-> все $\vec{r'}$ лежат на одной прямой, тогда $\tensor{A}$ -- \alert{линейный};
+				\item<3-> все $\vec{r'}$ лежат в одной плоскости, тогда $\tensor{A}$ -- \alert{планарный};
+				\item<4-> $\vec{r'}$ описывают все векторы, тогда $\tensor{A}$ -- \alert{полный};
+			\end{itemize}
+			
+		}
+	\end{exampleblock}
+
+	\only<5>{
+	\begin{exampleblock}{Задача}
+		\parbox{\textwidth}{
+			Привести пример тензора каждого типа и обосновать. 
+		}
+	\end{exampleblock}
+	}
+	
+}
+
+\frame{
+	\frametitle{Теорема о полном тензоре}
+	
+	\begin{theorems}[о полноте тензора]
+	\parbox{\textwidth}{
+		Для того, чтобы тензор $\tensor{\Pi}$ был полным необходимо и достаточно, чтобы его определитель был отличен от $0$.	
+	}	
+	\end{theorems} \pause 
+
+	\begin{proof}
+	\only<2>{		
+	\parbox{\textwidth}{
+	($\Rightarrow$) Пусть тензор $\tensor{\Pi}$ полный, тогда для любого вектора $\vec{r'} \in \Rt$ существует вектор $\vec{r} \in \Rt$, такой что $\vec{r'} = \tensor{\Pi}\cdot\vec{r}$. Для фиксированной системы координат это эквивалентно матричному равенству
+	\[
+	\begin{Bmatrix}
+	p_{11} & p_{12} & p_{13} \\
+	p_{21} & p_{22} & p_{23} \\
+	p_{31} & p_{32} & p_{33} \\
+	\end{Bmatrix} 
+	\begin{pmatrix}
+	r_{1} \\
+	r_{2} \\
+	r_{3} \\
+	\end{pmatrix}=
+	\begin{pmatrix}
+	r'_{1} \\
+	r'_{2} \\
+	r'_{3} \\
+	\end{pmatrix},
+	\]
+	где $r'_i$, $r_j$ и $p_{ks}$ -- координаты соответствующих векторов и компоненты тензора в выбранной системе координат. Полученная система линейных уравнений имеет решение при любой правой части, следовательно $D(\tensor{\Pi}) \neq 0$.
+	}
+	}	
+
+	\only<3>{		
+	\parbox{\textwidth}{
+		($\Leftarrow$) Пусть $D(\tensor{\Pi}) \neq 0$, тогда система линейных уравнений
+		\[
+		\begin{Bmatrix}
+		p_{11} & p_{12} & p_{13} \\
+		p_{21} & p_{22} & p_{23} \\
+		p_{31} & p_{32} & p_{33} \\
+		\end{Bmatrix} 
+		\begin{pmatrix}
+		r_{1} \\
+		r_{2} \\
+		r_{3} \\
+		\end{pmatrix}=
+		\begin{pmatrix}
+		r'_{1} \\
+		r'_{2} \\
+		r'_{3} \\
+		\end{pmatrix},
+		\]
+		имеет решение $r_j$ ($j=\overline{1,3}$) при любых значениях правой части $r'_i$ ($i=\overline{1,3}$)
+		где $r'_i$, $r_j$ и $p_{ks}$ -- координаты векторов и компоненты тензора в фиксированной системе координат. 
+		Таким образом, у каждого вектора $\vec{r'}$ есть прообраз $\vec{r}$ такой, что
+		$
+		\vec{r'} = \tensor{\Pi} \cdot \vec{r}.
+		$
+		Следовательно тензор $\tensor{\Pi}$ -- полный.
+	}
+	}
+	\end{proof}
+	
+	
+}
+
+\frame{
+	\frametitle{Обратный тензор}
+	
+	\begin{dfn}
+		Если для тензора $\tensor{\Pi}$ существует тензор $\tensor{B}$ такой, что
+		\[
+		\tensor{B} \cdot \tensor{\Pi} = \tensor{\Pi} \cdot \tensor{B} = \tensor{I},
+		\]
+		тогда тензор $\tensor{B}$ называется обратным тензором и обозначается $\tensor{\Pi}^{-1}$.
+	\end{dfn}
+	
+}
+
+\frame{
+	\frametitle{Теорема о существовании обратного тензора}
+	\begin{theorems}
+		\parbox{\textwidth}{
+		Полнота тензора есть необходимое и достаточное условие существования обратного тензора.
+		}
+
+	\end{theorems}
+
+	\begin{proof}
+		\parbox{\textwidth}{
+		Доказательство очевидно и вытекает из правила произведения тензоров как матриц и предыдущей теореме о полном тензоре.			
+		}
+	\end{proof}
+}
+
+\frame{
+	\frametitle{Главные значения тензора}
+	
+	\begin{dfn}
+		\parbox{\textwidth}{
+	
+		Если для заданного тензора $\tensor{\Pi}$, вектора $\vec{r}$ и числа $\lambda$ справедливо равенство
+		\[
+		\tensor{\Pi} \cdot \vec{r} = \lambda \vec{r} \quad (\vec{r} \neq 0),
+		\]
+		то говорят, что $\lambda$ -- главное значение тензора $\tensor{\Pi}$, а $\vec{r}$ -- собственный вектор.
+		}		
+	\end{dfn}
+
+	\begin{exampleblock}{Пояснения}
+		\parbox{\textwidth}{
+			Так как тензоры и векторы перемножаются по таким же законам как и матрицы, то главные значения тензора и его собственные векторы аналогичны собственным значениям и векторам соответствующим матрице тензора $\tensor{\Pi}$ в выбранной системе координат и не зависят от неё.
+		}
+	\end{exampleblock}
+}
+
+\frame{
+	\frametitle{Инварианты тензора}
+	
+	\begin{dfn}
+		Характеристическим многочленом тензора $\tensor{\Pi}$ называется функция
+		\[
+		\chi(\lambda) = D(\tensor{\Pi} - \lambda I) = -\lambda^3 + I_1 \lambda^2 - I_2 \lambda + I_3.
+		\]
+		
+		Величины $I_1$, $I_2$, $I_3$ -- называются \alert{инвариантами} тензора $\tensor{\Pi}$.
+	\end{dfn}\pause
+
+	\begin{exampleblock}{Свойство}
+		\parbox{\textwidth}{
+			Если $\Pi=(p_{ij})_{1\leq i,j \leq 3}$ матрица компонент тензора $\tensor{\Pi}$ в некотором базисе, тогда
+			\[
+			\begin{array}{ll}
+			I_1 = p_{11} + p_{22} + p_{33},\\
+			\\
+			I_2 = 
+			\begin{vmatrix}
+			p_{11} & p_{12}\\
+			p_{21} & p_{22}
+			\end{vmatrix}+
+			\begin{vmatrix}
+			p_{22} & p_{23}\\
+			p_{32} & p_{33}
+			\end{vmatrix}+
+			\begin{vmatrix}
+			p_{11} & p_{13}\\
+			p_{31} & p_{33}
+			\end{vmatrix}
+			\end{array},\quad
+			I_3 =
+			\begin{vmatrix}
+			p_{11} & p_{12} & p_{13}\\
+			p_{21} & p_{22} & p_{23}\\
+			p_{31} & p_{32} & p_{33}
+			\end{vmatrix}.
+			\]
+			
+		}
+	\end{exampleblock}
+	
+}
+
+\frame{
+	\frametitle{Постоянство ин}
+	
+}
+
+
+\end{document}
+

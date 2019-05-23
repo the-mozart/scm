@@ -2,6 +2,7 @@
 \newtheorem{theorems}{Теорема}  
 
 \newcommand{\Rn}{\mathrm{R}^n}
+\newcommand{\Rt}{\mathrm{R}^3}
 \newcommand{\Sm}{\mathrm{S}^m}
 \newcommand{\Ql}{\mathrm{Q}^l}
 
