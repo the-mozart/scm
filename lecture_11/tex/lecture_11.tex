@@ -145,7 +145,7 @@
 
 	\begin{proof}
 		\parbox{\textwidth}{
-		Доказательство очевидно и вытекает из правила произведения тензоров как матриц и предыдущей теореме о полном тензоре.			
+		Доказательство очевидно и вытекает из правила произведения тензоров как матриц и теоремы о полноте тензора.			
 		}
 	\end{proof}
 }
@@ -183,12 +183,33 @@
 		Величины $I_1$, $I_2$, $I_3$ -- называются \alert{инвариантами} тензора $\tensor{\Pi}$.
 	\end{dfn}\pause
 
-	\begin{exampleblock}{Свойство}
+	\begin{exampleblock}{Независимость от системы координат}
+		\parbox{\textwidth}{
+			Величины $I_1$, $I_2$, $I_3$ не зависят от выбора системы координат, т.к.
+			\[
+			\chi(\lambda) = D(\tensor{\Pi} - \lambda I) =  \det(\Pi' - \lambda I) = 
+			\det (Q^T \Pi Q - \lambda E) =
+%			\det (Q^T \Pi Q - \lambda Q^T Q) =
+			\]
+			\[
+			=
+			\det (Q^T (\Pi - \lambda  E) Q)=
+			\det Q^T \det(\Pi - \lambda  E) \det Q = \det(\Pi - \lambda  E),
+			\]
+			где $\Pi'$ и $\Pi$ компоненты тензора $\tensor{\Pi}$  в различных ортогональных системах координат, $Q$ -- матрица перехода ($Q^T = Q^{-1}$).
+		}
+	\end{exampleblock}
+
+}
+
+\frame{
+	\frametitle{Формулы для вычисления инвариантов}
+		\begin{exampleblock}{Свойство}
 		\parbox{\textwidth}{
 			Если $\Pi=(p_{ij})_{1\leq i,j \leq 3}$ матрица компонент тензора $\tensor{\Pi}$ в некотором базисе, тогда
 			\[
 			\begin{array}{ll}
-			I_1 = p_{11} + p_{22} + p_{33},\\
+			I_1 = p_{11} + p_{22} + p_{33} = \lambda_1 +\lambda_2 + \lambda_3,\\
 			\\
 			I_2 = 
 			\begin{vmatrix}
@@ -202,23 +223,22 @@
 			\begin{vmatrix}
 			p_{11} & p_{13}\\
 			p_{31} & p_{33}
-			\end{vmatrix}
-			\end{array},\quad
+			\end{vmatrix} = 
+			\lambda_1\lambda_2 +\lambda_2 \lambda_3 + \lambda_1\lambda_3,\\
+			\\
 			I_3 =
 			\begin{vmatrix}
 			p_{11} & p_{12} & p_{13}\\
 			p_{21} & p_{22} & p_{23}\\
 			p_{31} & p_{32} & p_{33}
-			\end{vmatrix}.
+			\end{vmatrix}=
+			\lambda_1\lambda_2\lambda_3,
+			\end{array}
 			\]
+			где $\lambda_i$ -- собственные числа тензора $\tensor{\Pi}$.
 			
 		}
 	\end{exampleblock}
-	
-}
-
-\frame{
-	\frametitle{Постоянство ин}
 	
 }
 
