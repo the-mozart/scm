@@ -175,12 +175,14 @@
 	\frametitle{Инварианты тензора}
 	
 	\begin{dfn}
+		\parbox{\textwidth}{
 		Характеристическим многочленом тензора $\tensor{\Pi}$ называется функция
 		\[
 		\chi(\lambda) = D(\tensor{\Pi} - \lambda I) = -\lambda^3 + I_1 \lambda^2 - I_2 \lambda + I_3.
 		\]
 		
 		Величины $I_1$, $I_2$, $I_3$ -- называются \alert{инвариантами} тензора $\tensor{\Pi}$.
+		}
 	\end{dfn}\pause
 
 	\begin{exampleblock}{Независимость от системы координат}
@@ -239,6 +241,130 @@
 			
 		}
 	\end{exampleblock}
+	
+}
+
+
+\frame{
+	\frametitle{Бискалярное произведение тензоров}
+	
+	\begin{dfn}
+		\parbox{\textwidth}{
+			\alert{Бискалярным произведением} тензоров называется первый инвариант (след) их скалярного произведения.
+		}
+	\end{dfn}\pause
+
+	\begin{exampleblock}{Формула для бискалярного произведения}
+		\parbox{\textwidth}{
+				Пусть $\tensor{A} = (a_{ij})_{1\leq i,j \leq 3}$, $\tensor{B} = (b_{ij})_{1\leq i,j \leq 3}$, $\tensor{C} = (c_{ij})_{1\leq i,j \leq 3}$ -- три тензора, причём $\tensor{C}=\tensor{A}\cdot\tensor{B}$, тогда бискалярное произведение $\tensor{A}$ и $\tensor{B}$ равно
+				\[
+				A \cdot\cdot B = I_{1(C)} = \sum\limits_{i=1}^3 c_{ii} = \sum\limits_{i=1}^3 \sum\limits_{k=1}^3 a_{ik}b_{ki}.
+				\]
+				
+				Таким образом, бискалярное произведение рассчитывается как свёртка компонентов первого и сопряжённых компонентов второго тензора.
+		}
+	\end{exampleblock}
+	
+}
+
+\frame{
+	\frametitle{Производная тензора одного аргумента}
+	
+	\begin{dfn}
+		\parbox{\textwidth}{
+			Пусть компоненты тензора $\tensor{\Pi}$ зависят от переменной $t$, т.е.
+			\[
+			\Pi(t) = \vec{i}_1 \vec{p}_1(t) + \vec{i}_2 \vec{p}_2(t)+  \vec{i}_3 \vec{p}_3(t),
+			\]
+			тогда производной тензора $\tensor{\Pi}$ по переменной $t$ называется
+			\[
+			\dt{\tensor{\Pi}} = \lim\limits_{\Delta t \to 0} \frac{\tensor{\Pi}(t+\Delta t) - \tensor{\Pi}(t) }{\Delta t}
+			\]
+		}
+		
+	\end{dfn}\pause
+	
+	\begin{exampleblock}{Производная через компоненты}
+		\parbox{\textwidth}{
+			
+		\[
+		\dt{\tensor{\Pi}} = \vec{i}_1 \dt{\vec{p}_1} + \vec{i}_2 \dt{\vec{p}_2}+  \vec{i}_3 \dt{\vec{p}_3}=
+		\begin{Bmatrix}
+		\dt{p_{11}} & \dt{p_{12}} & \dt{p_{13}} \\
+		\dt{p_{21}} & \dt{p_{22}} & \dt{p_{23}} \\
+		\dt{p_{31}} & \dt{p_{32}} & \dt{p_{33}} \\
+		\end{Bmatrix}
+		\]	
+		}
+	\end{exampleblock}
+}
+
+\frame{
+	\frametitle{Свойства производной тензора}
+	
+	\parbox{\textwidth}{
+		Для произвольного вектора $\vec{a} = \vec{a}(t)$ и тензора $\tensor{\Pi}=\tensor{\Pi}(t)$ справедливы следующие формулы:
+	\begin{enumerate}	
+		\item 
+		$
+			\displaystyle\dt{ (\tensor{\Pi} \cdot \vec{a})} = \dt{\tensor{\Pi}} \cdot \vec{a} + \tensor{\Pi} \cdot  \dt{\vec{a}}
+		$;
+		\item 
+		$
+		\displaystyle\dt{ (\tensor{\Pi} \times \vec{a})} = \dt{\tensor{\Pi}} \times \vec{a} + \tensor{\Pi} \times  \dt{\vec{a}}
+		$;
+		\item
+		$
+		\displaystyle\dt{(\tensor{\Pi}^{-1}) }= -\tensor{\Pi}^{-1} \cdot \dt{\tensor{\Pi}} \cdot \tensor{\Pi}^{-1}.
+		$
+	\end{enumerate}
+
+	Первые два равенства следуют из определения производной от тензора, последнее -- из определения обратного тензора.
+	}
+	
+}
+
+\frame{
+	\frametitle{ Тензорное поле }
+	
+	\begin{dfn}
+		\parbox{\textwidth}{
+			Если в каждой точке пространства определён тензор, то говорят что задано \alert{тензорное поле}
+			\[
+			\tensor{\Pi}=\tensor{\Pi}(\vec{r})= \vec{i}_1 \vec{p}_1(\vec{r}) + \vec{i}_2 \vec{p}_2(\vec{r})+  \vec{i}_3 \vec{p}_3(\vec{r}).
+			\]
+		}
+		
+	\end{dfn}\pause
+
+	\begin{dfn}
+	\parbox{\textwidth}{
+		Назовём \alert{потоком тензора} через поверхность $S$ вектор, образованный по формуле
+		\[
+		\int\limits_S \vec{n}\cdot\tensor{\Pi} dS, где
+		\]
+		$\vec{n}$ -- вектор внешней единичной нормали к поверхности $S$.
+	}
+	
+	\end{dfn}
+
+}
+
+\frame{
+	\frametitle{Теорема о потоке тензора}
+	
+	\begin{theorems}
+		\parbox{\textwidth}{
+		Для любого объёма $V$, ограниченного поверхностью $S$, справедлива формула
+		\[
+			\int\limits_S \vec{n}\cdot\tensor{\Pi} dS = 
+			\int\limits_V \left(
+			\pd{\vec{p}_1}{x_1} + \pd{\vec{p}_2}{x_2} + \pd{\vec{p}_3}{x_3}
+			\right) dV.
+		\]
+		}
+
+	\end{theorems}
 	
 }
 
