@@ -40,6 +40,7 @@
 \newcommand{\dvdef}[1]{\pdx{#1_x}+\pdy{#1_y}+\pdz{#1_z}}
 \newcommand{\dvdefds}[1]{\pdxds{#1_x}+\pdyds{#1_y}+\pdzds{#1_z}}
 \newcommand{\dvwv}[1]{\operatorname{div} #1}
+\newcommand{\divo}{\operatorname{div}}
 \newcommand{\rot}[1]{\operatorname{rot}\vec{#1}}
 \newcommand{\rotpr}[2]{\operatorname{rot}_{#1}\vec{#2}}
 \newcommand{\rotwv}[1]{\operatorname{rot} #1}
@@ -48,3 +49,6 @@
 \newcommand{\argq}{(q_1,q_2,q_3)}
 \newcommand{\argx}{(x,y,z)}
 \newcommand{\tensor}[1]{\boldsymbol{#1}}
+
+\newcommand{\argtr}{(t,\vec{r})}
+
