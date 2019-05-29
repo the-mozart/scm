@@ -1,5 +1,5 @@
 # scm
-The lecture course "Special Sections of Mathematics" for students of Novosibirsk Technical State University (Novosibirsk, Russia) in Russian
+Курс лекций <<Специальные главы математики>> для студентов 2-го курса Новосибирского государственного технического университета (Новосибирск, Россия)
 
 Лекция 0. Сведения из теории матриц
 
