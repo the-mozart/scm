@@ -368,6 +368,99 @@
 	
 }
 
+\frame{
+	\frametitle{Теорема о потоке тензора }
+	
+	\begin{proof}
+		\parbox{\textwidth}{
+			
+	\only<1>{			
+			Пусть $\tensor{\Pi} = \vec{i}_1 \vec{p}_1 + \vec{i}_2 \vec{p}_2 + \vec{i}_3 \vec{p}_3$, $\vec{n} = \vec{i}_1 n_1 + \vec{i}_2 n_2 + \vec{i}_3 n_3$, тогда
+		\[
+		\int\limits_S \vec{n}\cdot\tensor{\Pi} dS = 
+		\int\limits_S (n_1 \vec{p_1} + n_2 \vec{p_2} +n_3 \vec{p_3})=
+		\]
+		\[
+		=
+		\vec{i}_1 \int\limits_S (n_1 p_{11} + n_2 p_{21} + n_3 p_{31}) dS +
+		\vec{i}_2 \int\limits_S (n_1 p_{12} + n_2 p_{22} + n_3 p_{32}) dS +
+		\]
+		\[
+		+
+		\vec{i}_3 \int\limits_S (n_1 p_{13} + n_2 p_{23} + n_3 p_{33}) dS =
+		\]
+	}
+	\only<2>{
+		Пользуясь теоремой Гаусса-Остроградского, имеем
+	\[
+	=
+	\vec{i}_1 \int\limits_V \left( \pd{p_{11}}{x_1} + \pd{p_{21}}{x_2} + \pd{p_{31}}{x_3}\right) dV +
+	\vec{i}_2 \int\limits_V \left( \pd{p_{21}}{x_1} + \pd{p_{22}}{x_2} + \pd{p_{32}}{x_3}\right) dV +
+	\]
+	\[
+	+
+	\vec{i}_3 \int\limits_V \left( \pd{p_{31}}{x_1} + \pd{p_{32}}{x_2} + \pd{p_{33}}{x_3}\right) dV =
+%	\]
+%	\[
+%	=
+	\int\limits_V \left( \pd{\vec{p}_1}{x_1} + \pd{\vec{p}_{2}}{x_2} + \pd{\vec{p}_{3}}{x_3}\right) dV.
+	\]
+	}
+
+		}	
+	\end{proof}
+}
+
+\frame{
+	\frametitle{ Дивергенция тензора}
+	
+	\begin{dfn}
+		\parbox{\textwidth}{
+				
+			
+		\alert{Дивергенцией тензора} $\tensor{\Pi}$ в заданной точке называется вектор равный пределу отношения потока тензора через замкнутую поверхность $S$ к ограниченному ей объему $V$, когда последний стягивается к этой точке:
+		\[
+		\divo \tensor{\Pi} = \lim\limits_{V \to 0} \frac{1}{V} \int\limits_{S}\vec{n} \cdot \tensor{\Pi} dS.
+		\]
+		}
+
+	\end{dfn}\pause
+
+	\begin{exampleblock}{Замечание}
+		\parbox{\textwidth}{
+			Из определения дивергенции тензора и теоремы о потоке тензора следует, что
+			\[
+			\divo \tensor{\Pi} =  \pd{\vec{p}_1}{x_1} + \pd{\vec{p}_{2}}{x_2} + \pd{\vec{p}_{3}}{x_3}.
+			\]
+		}
+	\end{exampleblock}
+
+}
+
+\frame{
+	\frametitle{ Уравнения законов сохранения сплошной среды}
+	
+	\begin{exampleblock}{Законы сохранения в операторном виде}
+		\parbox{\textwidth}{
+			
+			\begin{tabular}{lc}
+			Закон сохранения массы: & $\displaystyle\dt{\rho} + \rho \divo \vec{v} = 0$, 	\\
+			Закон сохранения импульса: & $\displaystyle\rho \left(\vec{F} - \dt{\vec{v}}\right) + \divo \tensor{\Pi} = 0$,\\
+			Закон сохранения энергии: & $\displaystyle\rho c_v \dt{T} = \tensor{\Pi}\cdot\cdot\tensor{D} - \divo \vec{q}$.
+			\end{tabular}
+		
+			\medskip
+			Здесь $\rho\argtr$, $\vec{v}\argtr$, $T\argtr$ -- плотность, скорость и температура сплошной среды в момент времени $t$ в точке $\vec{r} = \vec{i}_1 x_1 + \vec{i}_2 x_2 + \vec{i}_3 x_3$;
+			$\tensor{\Pi}\argtr$, $\tensor{D}\argtr$ -- тензоры напряжений и скоростей деформаций индуцированные движением сплошной среды; $\vec{q}\argtr$ -- вектор притока тепла; $c_v$ -- коэффициент теплопроводности при постоянном объёме;
+			$\displaystyle\dt{} = \pd{}{t} + (\vec{v} \cdot \nabla)$ --  оператор субстанциональной производной.
+			
+		}
+	\end{exampleblock}
+	
+}
+
+
+
 
 \end{document}
 
