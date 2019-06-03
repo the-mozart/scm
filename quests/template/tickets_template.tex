@@ -1,0 +1,34 @@
+\documentclass[14pt]{extarticle}
+
+\usepackage[main=russian,english]{babel}   %% загружает пакет многоязыковой вёрстки
+\usepackage{fontspec}      %% подготавливает загрузку шрифтов Open Type, True Type и др.
+\defaultfontfeatures{Ligatures={TeX},Renderer=Basic}  %% свойства шрифтов по умолчанию
+\setmainfont{Times New Roman} %% задаёт основной шрифт документа
+
+\usepackage[left=20mm,right=20mm,top=15mm,bottom=20mm,a4paper]{geometry}
+
+\usepackage{textcomp}
+\usepackage{amssymb,amsmath}
+
+\input{../../include/definitions.inc} 
+
+
+\pagestyle{empty}
+
+\begin{document}
+
+{% for t in tickets %}
+\begin{flushright}
+\underline{ \textbf{Билет №~{{ t.tnum }}} }
+\end{flushright}
+\begin{enumerate}
+\item  {{ t.q1 }}
+\item  {{ t.q2 }}
+\end{enumerate}
+\hrulefill
+{% if t.lastonpage %}
+\newpage
+{% endif %}
+{% endfor %}
+
+\end{document}
