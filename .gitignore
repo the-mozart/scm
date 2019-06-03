@@ -157,3 +157,6 @@ Thumbs.db
 
 # Jupyter Notebook files
 *.ipynb_checkpoints
+
+# Python pycache
+__pycache__
