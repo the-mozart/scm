@@ -9,7 +9,7 @@
 \newcommand{\Rd}[1]{\mathbb{R}^{#1}}
 \newcommand{\Vn}{\mathrm{V}^n}
 
-\newcommand{\oper}[1]{{\bf #1}}
+\newcommand{\oper}[1]{\mathcal{#1}}
 \newcommand{\basis}[1]{\vec{\bf #1}}
 \newcommand{\dt}[1]{\frac{d #1}{dt}}
 \newcommand{\dtds}[1]{\displaystyle\frac{d #1}{dt}}
