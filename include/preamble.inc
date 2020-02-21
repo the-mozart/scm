@@ -27,6 +27,12 @@
 %\usefonttheme{professionalfonts}% SOLUTION
 \usefonttheme{serif}
 
+% Уменьшаем счётчик слайдов на два для того, чтобы нумерация не касалась слайда с титульной страницы аннотации
+
+\let\otp\titlepage
+\renewcommand{\titlepage}{\otp\addtocounter{framenumber}{-2}}
+
+
 \usepackage{textcomp}
 \usepackage{amssymb,amsmath}
 \usepackage{xcolor}
