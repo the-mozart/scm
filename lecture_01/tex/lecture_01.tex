@@ -4,18 +4,21 @@
 \usetheme{Singapore} %Copenhagen}
 %\usecolortheme{whale}
 
-\usepackage[T2A]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage[russian]{babel}
+%\usepackage[T2A]{fontenc}
+%\usepackage[utf8]{inputenc}
+%\usepackage[russian]{babel}
 
+\input{../../include/preamble.inc} 
+\input{../../include/definitions.inc} 
+\input{../../include/author.inc} 
 
-\usepackage{textcomp}
-\usepackage{amssymb,amsmath}
-%\usepackage{animate}
-%\usepackage{longtable}
-\usepackage{xcolor}
-
-\newcounter{N}
+%\usepackage{textcomp}
+%\usepackage{amssymb,amsmath}
+%%\usepackage{animate}
+%%\usepackage{longtable}
+%\usepackage{xcolor}
+%
+%\newcounter{N}
 
 %% Форматирование окружения itemize
 %\usepackage{ragged2e}
@@ -26,34 +29,35 @@
 \title[]{Сведения из теории матриц. Линейные преобразования векторных пространств и их свойства.
 }
 
-\author[]{ {\em Верещагин Антон Сергеевич}
-	\\
-	канд. физ.-мат. наук, доцент\\
-	\bigskip
-	Кафедра аэрогидродинамики ФЛА НГТУ
-}
+%\author[]{ {\em Верещагин Антон Сергеевич}
+%	\\
+%	канд. физ.-мат. наук, доцент\\
+%	\bigskip
+%	Кафедра аэрогидродинамики ФЛА НГТУ
+%}
 
 %
 %\date[]{Новосибирск -- 2016}
 
-\newtheorem{dfn}{Определение}  
-\newtheorem{theorems}{Теорема}  
-
-\newcommand{\Rn}{\mathrm{R}^n}
-\newcommand{\Sm}{\mathrm{S}^m}
-\newcommand{\Ql}{\mathrm{Q}^l}
-
-\newcommand{\Rd}[1]{\mathbb{R}^{#1}}
-\newcommand{\Vn}{\mathrm{V}^n}
-
-
-\newcommand{\oper}[1]{\mathcal{#1}}
+%\newtheorem{dfn}{Определение}  
+%\newtheorem{theorems}{Теорема}  
+%
+%\newcommand{\Rn}{\mathrm{R}^n}
+%\newcommand{\Sm}{\mathrm{S}^m}
+%\newcommand{\Ql}{\mathrm{Q}^l}
+%
+%\newcommand{\Rd}[1]{\mathbb{R}^{#1}}
+%\newcommand{\Vn}{\mathrm{V}^n}
+%
+%
+%\newcommand{\oper}[1]{\mathcal{#1}}
 
 \begin{document}
-\frame{\titlepage}
+	
+\frame[plain]{\titlepage}
 
 
-\frame{
+\frame[plain]{
 \frametitle{Аннотация}
 \parbox{\textwidth}{
 Векторное пространство. Отображение n-мерного вектора в m-мерный. Линейные операторы. Матрица, соответствующая линейному оператору. Сложение и умножение линейных операторов. Преобразования координат. Эквивалентные матрицы.
