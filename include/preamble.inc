@@ -1,5 +1,7 @@
 \beamertemplatenavigationsymbolsempty % Hide navigation panel
 
+\setbeamertemplate{headline}{}
+
 \setbeamertemplate{footline}{%
 %	\hspace{0.94\paperwidth}%
 	\leavevmode%
@@ -16,10 +18,6 @@
 	
 }
 
-% \usepackage[T2A]{fontenc}
-% \usepackage[utf8]{inputenc}
-% \usepackage[russian]{babel}
-
 \usepackage[main=russian,english]{babel}   %% загружает пакет многоязыковой вёрстки
 \usepackage{fontspec}      %% подготавливает загрузку шрифтов Open Type, True Type и др.
 \defaultfontfeatures{Ligatures={TeX},Renderer=Basic}  %% свойства шрифтов по умолчанию
@@ -32,10 +30,8 @@
 \let\otp\titlepage
 \renewcommand{\titlepage}{\otp\addtocounter{framenumber}{-2}}
 
-
 \usepackage{textcomp}
 \usepackage{amssymb,amsmath}
 \usepackage{xcolor}
-
 
 

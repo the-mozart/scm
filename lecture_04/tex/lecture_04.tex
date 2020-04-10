@@ -1,60 +1,17 @@
 \documentclass{beamer}
 
 \usepackage{beamerthemesplit}
-\usetheme{Singapore} %Copenhagen}
-%\usecolortheme{whale}
+\usetheme{Singapore} 
 
-\usepackage[T2A]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage[russian]{babel}
-
-
-\usepackage{textcomp}
-\usepackage{amssymb,amsmath}
-%\usepackage{animate}
-%\usepackage{longtable}
-\usepackage{xcolor}
-
-\newcounter{N}
-
-%% Форматирование окружения itemize
-%\usepackage{ragged2e}
-%\let\olditem\item
-%\renewcommand\item{\olditem\justifying}
-
+\input{../../include/preamble.inc} 
+\input{../../include/definitions.inc} 
+\input{../../include/author.inc} 
 
 \title[]{Элементы дифференциальной геометрии. Скалярные и векторные поля.}
-
-\author[]{ {\em Верещагин Антон Сергеевич}
-	\\
-	канд. физ.-мат. наук, доцент\\
-	\bigskip
-	Кафедра аэрогидродинамики ФЛА НГТУ
-}
-
-\newtheorem{dfn}{Определение}  
-\newtheorem{theorems}{Теорема}  
-
-\newcommand{\Rn}{\mathrm{R}^n}
-\newcommand{\Sm}{\mathrm{S}^m}
-\newcommand{\Ql}{\mathrm{Q}^l}
-
-\newcommand{\Rd}[1]{\mathbb{R}^{#1}}
-\newcommand{\Vn}{\mathrm{V}^n}
-
-\newcommand{\oper}[1]{{\bf #1}}
-\newcommand{\basis}[1]{\vec{\bf #1}}
-\newcommand{\dt}[1]{\frac{d #1}{dt}}
-\newcommand{\dtds}[1]{\displaystyle\frac{d #1}{dt}}
-\newcommand{\ds}[1]{\frac{d #1}{ds}}
-\newcommand{\dsds}[1]{\displaystyle\frac{d #1}{ds}}
-\newcommand{\dsd}[1]{\frac{d^2 #1}{ds^2}}
-
 
 \begin{document}
 
 \frame{\titlepage}
-
 
 \frame{
 \frametitle{Аннотация}

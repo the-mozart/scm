@@ -20,6 +20,6 @@
 	\end{columns}
 
 %	\bigskip
-	\bigskip
+%	\bigskip
 	\today
 }
