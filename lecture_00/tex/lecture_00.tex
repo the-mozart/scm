@@ -2,23 +2,21 @@
 
 \usepackage{beamerthemesplit}
 \usetheme{Singapore} %Copenhagen}
-%\usecolortheme{whale}
 
-\usepackage[T2A]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage[russian]{babel}
+\input{../../include/preamble.inc} 
+\input{../../include/definitions.inc} 
+\input{../../include/author.inc} 
 
+%\usepackage{textcomp}
+%\usepackage{amssymb,amsmath}
+%%\usepackage{animate}
+%%\usepackage{longtable}
+%\usepackage{xcolor}
+%\usepackage{enumitem}
+%
+%\newcounter{N}
 
-\usepackage{textcomp}
-\usepackage{amssymb,amsmath}
-%\usepackage{animate}
-%\usepackage{longtable}
-\usepackage{xcolor}
-\usepackage{enumitem}
-
-\newcounter{N}
-
-%% Форматирование окружения itemize
+%% Форматирование окружения enumerate
 %\usepackage{ragged2e}
 %\let\olditem\item
 %\renewcommand\item{\olditem\justifying}
@@ -26,27 +24,27 @@
 
 \title[]{Сведения из теории матриц}
 
-\author[]{ {\em Верещагин Антон Сергеевич}
-	\\
-	канд. физ.-мат. наук, доцент\\
-	\bigskip
-	Кафедра аэрогидродинамики ФЛА НГТУ
-}
+%\author[]{ {\em Верещагин Антон Сергеевич}
+%	\\
+%	канд. физ.-мат. наук, доцент\\
+%	\bigskip
+%	Кафедра аэрогидродинамики ФЛА НГТУ
+%}
 
-\newtheorem{dfn}{Определение}  
-\newtheorem{theorems}{Теорема}  
-\newtheorem{property}{Свойство}  
-
-
-\newcommand{\Rn}{\mathrm{R}^n}
-\newcommand{\Sm}{\mathrm{S}^m}
-\newcommand{\Ql}{\mathrm{Q}^l}
-
-\newcommand{\Rd}[1]{\mathbb{R}^{#1}}
-\newcommand{\Vn}{\mathrm{V}^n}
-
-
-\newcommand{\oper}[1]{\mathcal{#1}}
+%\newtheorem{dfn}{Определение}  
+%\newtheorem{theorems}{Теорема}  
+%\newtheorem{property}{Свойство}  
+%
+%
+%\newcommand{\Rn}{\mathrm{R}^n}
+%\newcommand{\Sm}{\mathrm{S}^m}
+%\newcommand{\Ql}{\mathrm{Q}^l}
+%
+%\newcommand{\Rd}[1]{\mathbb{R}^{#1}}
+%\newcommand{\Vn}{\mathrm{V}^n}
+%
+%
+%\newcommand{\oper}[1]{\mathcal{#1}}
 
 \begin{document}
 
@@ -122,13 +120,13 @@ a_{1,\alpha_1}a_{2,\alpha_2}\ldots a_{n,\alpha_n},
 
 
 \begin{property}
-\begin{itemize}[partopsep=1pt,label=\textbullet]
+\begin{enumerate}
 \item Определитель матрицы не меняется при транспонировании матрицы.
 \item Если две строки (столбца) матрицы совпадают, то её определитель равен нулю. 
 \item При добавлении к любой строке (столбцу) линейной комбинации других строк (столбцов) определитель не изменится. 
 \item Если хотя бы одна строка (столбец) матрицы нулевая, то определитель равен нулю.
 \item Если переставить две строки (столбца) матрицы, то её определитель умножается на (-1).
-\end{itemize}
+\end{enumerate}
 
 
 
@@ -177,10 +175,10 @@ a_{i_pk_1} & a_{i_pk_2} & \ldots & a_{i_pk_p}
 \end{dfn}
 \begin{property}
 \parbox{\textwidth}{
-\begin{itemize}[partopsep=1pt,label=\textbullet]
+\begin{enumerate}
 \item Ранг прямоугольной $m \times n$ матрицы $A$ меньше либо равен $\min(m,n)$: $r_A \leq \min(m,n)$.
 \item Если у квадратной $n\times n$ матрицы $A$ определитель равен $0$, тогда $r_A < n$, в противном случае $r_A = n$.
-\end{itemize}
+\end{enumerate}
 
 }
 \end{property}
@@ -246,13 +244,13 @@ A B = BA = E,
 \frametitle{ Некоторые свойства операций над матрицами }
 \begin{property}
 \parbox{\textwidth}{
-\begin{itemize}[partopsep=1pt,label=\textbullet]
+\begin{enumerate}
 \item В общем случае, вообще говоря, $AB \neq BA$.
 \item Для любой квадратной матрицы $A$ и соответствующего размера единичной $E$: $AE$=$EA$ =$A$.
 \item $|AB|=|A||B|$.
 \item $|A^{-1}|=|A|^{-1}$.
 \item Для квадратной матрицы $A$ существует обратная матрица $A^{-1}$ тогда и только тогда, когда $|A|\neq 0$.
-\end{itemize}
+\end{enumerate}
 }
 \end{property}
 }
@@ -297,7 +295,7 @@ Ax=b.
 	
 	\begin{exampleblock}{Теорема Кронекера-Капелли}
 		\parbox{\textwidth}{
-		Система линейных уравнений $Ax=b$ разрешима тогда и только тогда, когда ранг матрицы $A$ равен рангу матрицы $A|b$, где $A|b$~-- расширенная матрица, полученная из матрицы $A$ приписыванием столбца $b$.	
+		Система линейных уравнений $Ax=b$ разрешима тогда и только тогда, когда ранг матрицы $A$ равен рангу матрицы $A|b$, где $A|b$~-- расширенная матрица, полученная из матрицы $A$ приписыванием столбца $b$. 	
 		}
 	\end{exampleblock}
 }
@@ -305,12 +303,12 @@ Ax=b.
 \frame{
 	\frametitle{Литература}
 	
-	\begin{itemize}[partopsep=1pt,label=\textbullet]
+	\begin{literature}
 		\item 
 		{\em Курош~А.~Г.} Курс высшей алгебры. Учебник. 17-е изд., стер. -- СПб.: Издательство <<Лань>>, 2008.
 		
 		\item {\em Ветлуцкий~В.~Н.} Специальные разделы высшей математики: учеб. пособие. -- Новосибирск: Изд-во НГТУ, 2005.
-	\end{itemize}
+	\end{literature}
 	
 }
 

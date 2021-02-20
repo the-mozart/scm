@@ -1,5 +1,6 @@
 \newtheorem{dfn}{Определение}  
 \newtheorem{theorems}{Теорема}  
+\newtheorem{property}{Свойство}
 
 \newcommand{\Rn}{\mathrm{R}^n}
 \newcommand{\Rt}{\mathrm{R}^3}
@@ -51,4 +52,12 @@
 \newcommand{\tensor}[1]{\boldsymbol{#1}}
 
 \newcommand{\argtr}{(t,\vec{r})}
+
+
+% Списки
+\newlist{literature}{enumerate}{1}
+\setlist[literature]{partopsep=1pt,label=\arabic{literaturei}.}
+
+\newlist{enum}{enumerate}{1}
+\setlist[enum]{partopsep=1pt,label=\arabic{enumi})}
 
